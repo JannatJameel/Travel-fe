@@ -1,5 +1,16 @@
+//Styling
+
+//Components
+import NavBar from "./components/NavBar";
+import Routes from "./components/Routes";
+
 function App() {
-  return <div></div>;
+  return (
+    <>
+      <NavBar />
+      <Routes />
+    </>
+  );
 }
 
 export default App;
