@@ -188,5 +188,3 @@ const travelers = ["1 Adult", "2 Adults", "3 Adults"];
 const flightClass = ["Economy", "Business Class", "First Class"];
 
 export default Home;
-
-//dhhdeuegwye
