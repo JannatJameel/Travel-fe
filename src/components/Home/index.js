@@ -1,4 +1,8 @@
-
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { searchDepartures } from "../../store/actions/flightActions";
+import { searchReturns } from "../../store/actions/flightActions";
+// Styling
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import { useState } from "react";
@@ -21,124 +25,121 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-  //   const [value, setValue] = useState("");
+  const [roundtrip, setRoundtrip] = useState(false);
 
-  const [flight, setFlight] = useState({
-    departureDate: "",
-    returnDate: "",
-  });
+  const [flight, setFlight] = useState(
+    roundtrip ? { departureDate: "", returnDate: "" } : { departureDate: "" }
+  );
   console.log(flight);
-  const handleSubmit = () => {
-    console.log(flight);
-  };
 
   const handleChange = (event) => {
     setFlight({ ...flight, [event.target.name]: event.target.value });
     console.log("SUBMIT", flight);
   };
-  //Show and hide element
-  var hidden = false;
-  function action() {
-    hidden = !hidden;
-    if (hidden) {
-      document.getElementById("togglee").style.visibility = "hidden";
-    } else {
-      document.getElementById("togglee").style.visibility = "visible";
-    }
-  }
+
+  const handleSubmit = () => {
+    dispatch(searchDepartures(flight));
+    dispatch(searchReturns(flight));
+    history.push("/flights");
+  };
+
   return (
     <Container maxWidth="md">
       <div class="card w-75">
         <div class="card-body">
           <h5 class="card-title">Flights</h5>
 
-          <Button onClick={action} color="primary">
+          <Button onClick={() => setRoundtrip(true)} color="primary">
             Roundtrip
           </Button>
-          <Button onClick={action} color="primary">
+          <Button onClick={() => setRoundtrip(false)} color="primary">
             One-way
           </Button>
 
           <br />
           {/* Departure Flight */}
           <Autocomplete
-            value={flight.departureLocation}
-            name="departureLocation"
-            id="combo-box-demo"
+            id="departureDestination"
+            value={flight.departureAirport}
             onChange={(event, newValue) => {
-              setFlight({ ...flight, departureLocation: newValue });
+              setFlight({ ...flight, departureAirport: newValue });
             }}
-            options={departureLocation}
+            options={departureAirport}
             getOptionLabel={(option) => option}
             style={{ width: 200 }}
             renderInput={(params) => (
               <TextField
                 {...params}
-                label="Departure Location"
+                label="Departure Airport"
                 variant="outlined"
               />
             )}
           />
-          {/* Return Flight */}
-          <div id="togglee">
-            <Autocomplete
-              value={flight.returnLocation}
-              name="returnLocation"
-              id="combo-box-demo"
-              onChange={(event, newValue) => {
-                setFlight({ ...flight, returnLocation: newValue });
-              }}
-              options={returnLocation}
-              getOptionLabel={(option) => option}
-              style={{ width: 200 }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Return Location"
-                  variant="outlined"
-                />
-              )}
-            />
-          </div>
 
           <br />
-          {/* Travelers */}
+
+          {/* Return Flight */}
+          {roundtrip && (
+            <div id="togglee">
+              <Autocomplete
+                id="returnLocation"
+                value={flight.returnAirport}
+                onChange={(event, newValue) => {
+                  setFlight({ ...flight, returnAirport: newValue });
+                }}
+                options={returnAirport}
+                getOptionLabel={(option) => option}
+                style={{ width: 200 }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Arrival Airport"
+                    variant="outlined"
+                  />
+                )}
+              />
+            </div>
+          )}
+
+          <br />
+
+          {/* Travellers */}
           <Autocomplete
-            value={flight.travelers}
-            name="travelers"
-            id="combo-box-demo"
+            id="travellers"
+            value={flight.passengers}
             onChange={(event, newValue) => {
-              setFlight({ ...flight, travelers: newValue });
+              setFlight({ ...flight, passengers: parseInt(newValue) });
             }}
             options={travelers}
             getOptionLabel={(option) => option}
             style={{ width: 200 }}
             renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Number of Travelers"
-                variant="outlined"
-              />
+              <TextField {...params} label="Travellers" variant="outlined" />
             )}
           />
+
+          <br />
+
           {/* Flying Class */}
           <Autocomplete
+            id="flightClass"
             value={flight.flightClass}
-            name="flightClass"
-            id="combo-box-demo"
             onChange={(event, newValue) => {
-              setFlight({ ...flight, flightClass: newValue });
+              setFlight({ ...flight, flightClass: newValue.toLowerCase() });
             }}
             options={flightClass}
             getOptionLabel={(option) => option}
             style={{ width: 200 }}
             renderInput={(params) => (
-              <TextField {...params} label="Flying Class" variant="outlined" />
+              <TextField {...params} label="Class" variant="outlined" />
             )}
           />
 
           <br />
+
           {/* Departure Date */}
           <form className={classes.container} noValidate>
             <TextField
@@ -146,34 +147,36 @@ const Home = () => {
               value={flight.departureDate}
               onChange={handleChange}
               variant="outlined"
-              id="date"
               label="Departure Date"
               type="date"
-              defaultValue="2021-03-08"
+              defaultValue={new Date()}
               className={classes.textField}
               InputLabelProps={{
                 shrink: true,
               }}
             />
           </form>
-          {/* Return Date */}
 
-          <form className={classes.container} noValidate>
-            <TextField
-              name="returnDate"
-              value={flight.returnDate}
-              onChange={handleChange}
-              variant="outlined"
-              id="date"
-              label="Return Date"
-              type="date"
-              defaultValue="2021-03-08"
-              className={classes.textField}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-          </form>
+          <br />
+
+          {/* Return Date */}
+          {roundtrip && (
+            <form className={classes.container} noValidate>
+              <TextField
+                name="returnDate"
+                value={flight.returnDate}
+                onChange={handleChange}
+                variant="outlined"
+                label="Return Date"
+                type="date"
+                defaultValue={new Date()}
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </form>
+          )}
 
           <Button onClick={handleSubmit} variant="contained" color="primary">
             Search
@@ -183,11 +186,9 @@ const Home = () => {
     </Container>
   );
 };
-const departureLocation = ["Bahrain", "UAE", "KSA"];
-const returnLocation = ["Bahrain", "UAE", "KSA"];
-const travelers = ["1 Adult", "2 Adults", "3 Adults"];
-const flightClass = ["Economy", "Business Class", "First Class"];
+const departureAirport = ["BH", "UAE", "KSA"];
+const returnAirport = ["BH", "UAE", "KSA"];
+const travelers = ["1", "2", "3"];
+const flightClass = ["Economy", "Business"];
 
 export default Home;
-//Home branch
-
