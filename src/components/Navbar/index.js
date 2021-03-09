@@ -1,3 +1,8 @@
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
+import { signout } from "../../store/actions/authActions";
+import { FaUserAstronaut } from "react-icons/fa";
+//Styling
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -16,9 +21,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NavBar = () => {
-  const classes = useStyles();
+const NavBar = (props) => {
+  const user = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
+  const handleSignout = () => {
+    dispatch(signout());
+    history.replace("/");
+  };
+  const classes = useStyles();
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -26,7 +38,19 @@ const NavBar = () => {
           <Typography variant="h6" className={classes.title}>
             Time Travellers
           </Typography>
-          <Button color="inherit">Login</Button>
+          {user ? (
+            <>
+              <FaUserAstronaut color="#fff" size="1.3em" />
+
+              <Button color="inherit" onClick={handleSignout}>
+                Sign out
+              </Button>
+            </>
+          ) : (
+            <Button color="inherit" href="/signin">
+              Sign in
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </div>
