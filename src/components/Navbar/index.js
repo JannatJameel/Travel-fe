@@ -1,3 +1,6 @@
+import { useDispatch, useSelector } from "react-redux";
+
+//Styling
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -17,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NavBar = () => {
+  // const user = useSelector((state) => state.authReducer.user);
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -26,7 +29,9 @@ const NavBar = () => {
           <Typography variant="h6" className={classes.title}>
             Time Travellers
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit" href="/signin">
+            Sign in
+          </Button>
         </Toolbar>
       </AppBar>
     </div>
