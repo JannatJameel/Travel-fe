@@ -42,7 +42,6 @@ export const signin = (user, history) => {
 export const signout = () => {
   localStorage.removeItem("myToken");
   delete instance.defaults.headers.common.Authorization;
-  const token = localStorage.getItem("myToken");
   return {
     type: types.SET_USER,
     payload: null,
