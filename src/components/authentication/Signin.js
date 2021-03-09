@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -54,7 +53,6 @@ const Signin = () => {
     event.preventDefault();
     dispatch(signin(user, history));
   };
-  console.log(user);
 
   return (
     <Container component="main" maxWidth="xs">
