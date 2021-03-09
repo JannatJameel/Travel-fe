@@ -1,8 +1,10 @@
 import { Route, Switch } from "react-router";
+// Components
 import Home from "./Home";
 import Signin from "./Signin";
 import Signup from "./Signup";
 import FlightList from "./FlightList";
+
 const Routes = () => {
   return (
     <Switch>
