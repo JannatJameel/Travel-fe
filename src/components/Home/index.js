@@ -83,27 +83,25 @@ const Home = () => {
           <br />
 
           {/* Return Flight */}
-          {roundtrip && (
-            <div id="togglee">
-              <Autocomplete
-                id="returnLocation"
-                value={flight.returnAirport}
-                onChange={(event, newValue) => {
-                  setFlight({ ...flight, returnAirport: newValue });
-                }}
-                options={returnAirport}
-                getOptionLabel={(option) => option}
-                style={{ width: 200 }}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Arrival Airport"
-                    variant="outlined"
-                  />
-                )}
-              />
-            </div>
-          )}
+          <div id="togglee">
+            <Autocomplete
+              id="returnLocation"
+              value={flight.returnAirport}
+              onChange={(event, newValue) => {
+                setFlight({ ...flight, returnAirport: newValue });
+              }}
+              options={returnAirport}
+              getOptionLabel={(option) => option}
+              style={{ width: 200 }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Arrival Airport"
+                  variant="outlined"
+                />
+              )}
+            />
+          </div>
 
           <br />
 
