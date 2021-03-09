@@ -3,6 +3,7 @@ import * as types from "../types";
 const initialState = {
   departureFlights: [],
   returnFlights: [],
+  airports: [],
   loading: true,
 };
 
@@ -18,6 +19,11 @@ const flightReducer = (state = initialState, action) => {
       return {
         ...state,
         returnFlights: action.payload,
+      };
+    case types.FETCH_AIRPORTS:
+      return {
+        ...state,
+        airports: action.payload,
       };
     default:
       return state;

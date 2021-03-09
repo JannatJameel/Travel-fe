@@ -15,19 +15,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const FlightCard = () => {
+const FlightCard = ({ flight }) => {
   const classes = useStyles();
-
+  console.log("from card", flight);
   return (
     <div margin="10">
       <Paper className={classes.paper}>
         <Grid container spacing={1}>
           <Grid item xs={6}>
             <Typography gutterBottom variant="subtitle1">
-              6:00pm - 8:00pm
+              {flight.departureTime} - {flight.arrivalTime}
             </Typography>
             <Typography variant="body2" gutterBottom>
-              Manama(BAH) - Riyadh(RUH)
+              {flight.departureAirport} - {flight.arrivalAirport}
             </Typography>
             <Typography variant="body2" color="textSecondary">
               Gulf Air
@@ -39,7 +39,7 @@ const FlightCard = () => {
             </Typography>
           </Grid>
           <Grid item xs>
-            <Typography variant="subtitle1">$400</Typography>
+            <Typography variant="subtitle1">BD{flight.price}</Typography>
             <Typography variant="body2" color="textSecondary">
               Per Traveller
             </Typography>

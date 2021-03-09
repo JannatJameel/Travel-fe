@@ -1,11 +1,12 @@
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { fetchAirports } from "../../store/actions/flightActions";
 import { searchDepartures } from "../../store/actions/flightActions";
 import { searchReturns } from "../../store/actions/flightActions";
 // Styling
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
-import { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
@@ -27,13 +28,13 @@ const Home = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
+  dispatch(fetchAirports());
 
   const [roundtrip, setRoundtrip] = useState(false);
 
   const [flight, setFlight] = useState(
     roundtrip ? { departureDate: "", returnDate: "" } : { departureDate: "" }
   );
-  console.log(flight);
 
   const handleChange = (event) => {
     setFlight({ ...flight, [event.target.name]: event.target.value });
