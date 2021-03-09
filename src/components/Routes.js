@@ -2,6 +2,7 @@ import { Route, Switch } from "react-router";
 import Home from "./Home";
 import Signin from "./Signin";
 import Signup from "./Signup";
+import FlightList from "./FlightList";
 const Routes = () => {
   return (
     <Switch>
@@ -10,6 +11,9 @@ const Routes = () => {
       </Route>
       <Route path="/signup">
         <Signup />
+      </Route>
+      <Route path="/flight">
+        <FlightList />
       </Route>
       <Route path="/">
         <Home />
