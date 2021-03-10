@@ -3,6 +3,8 @@ import { Route, Switch } from "react-router";
 import Home from "./Home";
 import Signin from "./authentication/Signin";
 import Signup from "./authentication/Signup";
+import DepartureFlights from "./FlightList/DepartureFlights";
+import ReturnFlights from "./FlightList/ReturnFlights";
 import FlightList from "./FlightList";
 
 const Routes = () => {
@@ -14,6 +16,12 @@ const Routes = () => {
       <Route path="/signup">
         <Signup />
       </Route>
+      {/* <Route path="/departure-flights">
+        <DepartureFlights />
+      </Route>
+      <Route path="/return-flights">
+        <ReturnFlights />
+      </Route> */}
       <Route path="/flights">
         <FlightList />
       </Route>
