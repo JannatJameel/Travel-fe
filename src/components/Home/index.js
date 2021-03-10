@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { fetchAirports } from "../../store/actions/flightActions";
 import { searchDepartures } from "../../store/actions/flightActions";
 import { searchReturns } from "../../store/actions/flightActions";
 // Styling
@@ -28,7 +27,6 @@ const Home = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
-  dispatch(fetchAirports());
 
   const [roundtrip, setRoundtrip] = useState(false);
 
@@ -38,7 +36,6 @@ const Home = () => {
 
   const handleChange = (event) => {
     setFlight({ ...flight, [event.target.name]: event.target.value });
-    console.log("SUBMIT", flight);
   };
 
   const handleSubmit = () => {
@@ -46,6 +43,12 @@ const Home = () => {
     dispatch(searchReturns(flight));
     history.push("/flights");
   };
+
+  const allAirports = useSelector((state) => state.flight.airports);
+  const departureAirports = allAirports.map((airport) => airport.location);
+  const arrivalAirports = departureAirports.filter(
+    (airport) => airport !== flight.departureAirport
+  );
 
   return (
     <Container maxWidth="md">
@@ -63,12 +66,12 @@ const Home = () => {
           <br />
           {/* Departure Flight */}
           <Autocomplete
-            id="departureDestination"
+            id="departureAirport"
             value={flight.departureAirport}
             onChange={(event, newValue) => {
               setFlight({ ...flight, departureAirport: newValue });
             }}
-            options={departureAirport}
+            options={departureAirports}
             getOptionLabel={(option) => option}
             style={{ width: 200 }}
             renderInput={(params) => (
@@ -85,12 +88,12 @@ const Home = () => {
           {/* Return Flight */}
           <div id="togglee">
             <Autocomplete
-              id="returnLocation"
-              value={flight.returnAirport}
+              id="arrivalAirports"
+              value={flight.arrivalAirport}
               onChange={(event, newValue) => {
-                setFlight({ ...flight, returnAirport: newValue });
+                setFlight({ ...flight, arrivalAirport: newValue });
               }}
-              options={returnAirport}
+              options={arrivalAirports}
               getOptionLabel={(option) => option}
               style={{ width: 200 }}
               renderInput={(params) => (
@@ -112,7 +115,7 @@ const Home = () => {
             onChange={(event, newValue) => {
               setFlight({ ...flight, passengers: parseInt(newValue) });
             }}
-            options={travelers}
+            options={travellers}
             getOptionLabel={(option) => option}
             style={{ width: 200 }}
             renderInput={(params) => (
@@ -185,9 +188,8 @@ const Home = () => {
     </Container>
   );
 };
-const departureAirport = ["BH", "UAE", "KSA"];
-const returnAirport = ["BH", "UAE", "KSA"];
-const travelers = ["1", "2", "3"];
+
+const travellers = ["1", "2", "3", "4", "5", "6"];
 const flightClass = ["Economy", "Business"];
 
 export default Home;
