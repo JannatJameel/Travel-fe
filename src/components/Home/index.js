@@ -41,7 +41,7 @@ const Home = () => {
   const handleSubmit = () => {
     dispatch(searchDepartures(flight));
     dispatch(searchReturns(flight));
-    history.push("/flights");
+    history.push("/departure-flights");
   };
 
   const allAirports = useSelector((state) => state.flight.airports);
@@ -143,13 +143,31 @@ const Home = () => {
           <br />
 
           {/* Departure Date */}
-          <form className={classes.container} noValidate>
+          <TextField
+            name="departureDate"
+            value={flight.departureDate}
+            onChange={handleChange}
+            variant="outlined"
+            label="Departure Date"
+            type="date"
+            defaultValue={new Date()}
+            className={classes.textField}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+
+          <br />
+          <br />
+
+          {/* Return Date */}
+          {roundtrip && (
             <TextField
-              name="departureDate"
-              value={flight.departureDate}
+              name="returnDate"
+              value={flight.returnDate}
               onChange={handleChange}
               variant="outlined"
-              label="Departure Date"
+              label="Return Date"
               type="date"
               defaultValue={new Date()}
               className={classes.textField}
@@ -157,28 +175,9 @@ const Home = () => {
                 shrink: true,
               }}
             />
-          </form>
+          )}
 
           <br />
-
-          {/* Return Date */}
-          {roundtrip && (
-            <form className={classes.container} noValidate>
-              <TextField
-                name="returnDate"
-                value={flight.returnDate}
-                onChange={handleChange}
-                variant="outlined"
-                label="Return Date"
-                type="date"
-                defaultValue={new Date()}
-                className={classes.textField}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-            </form>
-          )}
 
           <Button onClick={handleSubmit} variant="contained" color="primary">
             Search

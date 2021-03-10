@@ -10,7 +10,12 @@ const DepartureFlights = () => {
     <div>
       <h2>Departure Flights</h2>
       {departureFlights.map((flight) => (
-        <FlightCard flight={flight} roundTrip={false} key={flight.id} />
+        <FlightCard
+          flight={flight}
+          roundTrip={false}
+          isReturnFlight={false}
+          key={flight.id}
+        />
       ))}
     </div>
   );
