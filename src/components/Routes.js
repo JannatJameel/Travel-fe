@@ -16,15 +16,15 @@ const Routes = () => {
       <Route path="/signup">
         <Signup />
       </Route>
-      {/* <Route path="/departure-flights">
+      <Route path="/departure-flights">
         <DepartureFlights />
       </Route>
       <Route path="/return-flights">
         <ReturnFlights />
-      </Route> */}
-      <Route path="/flights">
-        <FlightList />
       </Route>
+      {/* <Route path="/flights">
+        <FlightList />
+      </Route> */}
       <Route path="/">
         <Home />
       </Route>
