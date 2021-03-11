@@ -27,9 +27,7 @@ const FlightCard = ({ flight, isReturnFlight }) => {
   const handleAddFlight = () => {
     const newFlight = { flightId: flight.id };
     dispatch(addFlight(flight));
-    isReturnFlight
-      ? alert("you can now checkout")
-      : history.push("/return-flights");
+    isReturnFlight ? history.push("/booking") : history.push("/return-flights");
   };
   return (
     <div margin="10">

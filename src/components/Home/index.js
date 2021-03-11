@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { searchDepartures } from "../../store/actions/flightActions";
 import { searchReturns } from "../../store/actions/flightActions";
@@ -38,17 +38,18 @@ const Home = () => {
     setFlight({ ...flight, [event.target.name]: event.target.value });
   };
 
-  const handleSubmit = () => {
-    dispatch(searchDepartures(flight));
-    dispatch(searchReturns(flight));
-    history.push("/departure-flights");
-  };
-
   const allAirports = useSelector((state) => state.flight.airports);
   const departureAirports = allAirports.map((airport) => airport.location);
   const arrivalAirports = departureAirports.filter(
     (airport) => airport !== flight.departureAirport
   );
+
+  const handleSubmit = () => {
+    dispatch(searchDepartures(flight));
+    dispatch(searchReturns(flight));
+    localStorage.setItem("passengers", flight.passengers);
+    history.push("/departure-flights");
+  };
 
   return (
     <Container maxWidth="md">
@@ -86,25 +87,23 @@ const Home = () => {
           <br />
 
           {/* Return Flight */}
-          <div id="togglee">
-            <Autocomplete
-              id="arrivalAirports"
-              value={flight.arrivalAirport}
-              onChange={(event, newValue) => {
-                setFlight({ ...flight, arrivalAirport: newValue });
-              }}
-              options={arrivalAirports}
-              getOptionLabel={(option) => option}
-              style={{ width: 200 }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Arrival Airport"
-                  variant="outlined"
-                />
-              )}
-            />
-          </div>
+          <Autocomplete
+            id="arrivalAirports"
+            value={flight.arrivalAirport}
+            onChange={(event, newValue) => {
+              setFlight({ ...flight, arrivalAirport: newValue });
+            }}
+            options={arrivalAirports}
+            getOptionLabel={(option) => option}
+            style={{ width: 200 }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Arrival Airport"
+                variant="outlined"
+              />
+            )}
+          />
 
           <br />
 

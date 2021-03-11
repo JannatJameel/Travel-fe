@@ -4,15 +4,30 @@ import FlightCard from "./FlightCard";
 
 const ReturnFlights = () => {
   const returnFlights = useSelector((state) => state.flight.returnFlights);
+  console.log("Test reutrn flights", returnFlights);
   const bookings = useSelector((state) => state.booking.bookings);
+  console.log("Test booking", bookings);
   const minTime =
-    Date.parse([bookings.arrivalDate, bookings.arrivalTime].join(" ")) + 7200;
+    Date.parse([bookings[0].arrivalDate, bookings[0].arrivalTime].join(" ")) +
+    7200000;
+
+  console.log("Test min Time", minTime);
 
   const availableFlights = returnFlights.filter(
     (flight) =>
       Date.parse([flight.departureDate, flight.departureTime].join(" ")) >=
       minTime
   );
+  console.log(
+    "Test return time",
+    Date.parse(
+      [
+        availableFlights[0].departureDate,
+        availableFlights[0].departureTime,
+      ].join(" ")
+    )
+  );
+  console.log("Test availble flight", availableFlights);
 
   return (
     <div>
