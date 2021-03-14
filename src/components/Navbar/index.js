@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { signout } from "../../store/actions/authActions";
+import { signout, fetchProfile } from "../../store/actions/authActions";
 import { FaUserAstronaut } from "react-icons/fa";
 //Styling
 import { makeStyles } from "@material-ui/core/styles";
@@ -8,6 +8,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,7 +22,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NavBar = (props) => {
+const NavBar = () => {
+  const classes = useStyles();
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -30,7 +32,12 @@ const NavBar = (props) => {
     dispatch(signout());
     history.replace("/");
   };
-  const classes = useStyles();
+
+  const handleProfile = () => {
+    dispatch(fetchProfile());
+    history.push("/my-profile");
+  };
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -40,7 +47,9 @@ const NavBar = (props) => {
           </Typography>
           {user ? (
             <>
-              <FaUserAstronaut color="#fff" size="1.3em" />
+              <IconButton onClick={handleProfile}>
+                <FaUserAstronaut color="#fff" size="1em" />
+              </IconButton>
 
               <Button color="inherit" onClick={handleSignout}>
                 Sign out

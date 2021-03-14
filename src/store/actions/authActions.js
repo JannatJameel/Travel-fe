@@ -61,3 +61,17 @@ export const checkForToken = () => (dispatch) => {
     }
   }
 };
+
+export const fetchProfile = () => {
+  return async (dispatch) => {
+    try {
+      const res = await instance.get("/profile");
+      dispatch({
+        type: types.FETCH_PROFILE,
+        payload: res.data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
