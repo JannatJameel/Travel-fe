@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { signin } from "../../store/actions/authActions";
-
 // Styling
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -52,6 +51,9 @@ const Signin = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(signin(user, history));
+    localStorage.getItem("cartItems") === null
+      ? history.replace("/")
+      : history.replace("/checkout");
   };
 
   return (

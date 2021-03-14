@@ -1,6 +1,3 @@
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { addFlight } from "../../store/actions/bookingActions";
 // Styling
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -19,18 +16,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const FlightCard = ({ flight, isReturnFlight }) => {
+const FlightCard = ({ flight }) => {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const history = useHistory();
 
-  const handleAddFlight = () => {
-    dispatch(addFlight(flight));
-    isReturnFlight ? history.push("/booking") : history.push("/return-flights");
-  };
   return (
     <div margin="10">
-      <Paper className={classes.paper} onClick={handleAddFlight}>
+      <Paper className={classes.paper}>
         <Grid container spacing={1}>
           <Grid item xs={6}>
             <Typography gutterBottom variant="subtitle1">

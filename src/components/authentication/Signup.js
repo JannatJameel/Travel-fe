@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { signup } from "../../store/actions/authActions";
-
 // Styling
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
@@ -56,7 +55,6 @@ const Signup = () => {
     dispatch(signup(user, history));
   };
 
-  console.log(user);
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
