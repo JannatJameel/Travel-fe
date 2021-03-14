@@ -1,3 +1,4 @@
+import { useState } from "react";
 // Styling
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -7,10 +8,21 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Box from "@material-ui/core/Box";
 
 const TravellersForm = () => {
-  const passengers = localStorage.getItem("passengers");
+  const passengersNum = localStorage.getItem("passengers");
 
   const count = [];
-  while (count.length < passengers) count.push(`${count.length + 1}`);
+  while (count.length < passengersNum) count.push(`${count.length + 1}`);
+
+  const passenger = [];
+  while (passenger.length < passengersNum)
+    passenger.push({ firstName: "", lastName: "", passport: "" });
+
+  const [passengers, setPassengers] = useState(passenger);
+
+  const handleChange = (event) =>
+    setPassengers({ ...passenger, [event.target.name]: event.target.value });
+  console.log("Passengers array", passengers);
+
   return (
     <>
       {count.map((traveller) => (
@@ -26,36 +38,34 @@ const TravellersForm = () => {
                 label="First name"
                 fullWidth
                 autoComplete="given-name"
+                value={passengers[parseInt(traveller) - 1].firstName}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
                 required
-                name="lastName"
+                name={`lastName${traveller}`}
                 label="Last name"
                 fullWidth
                 autoComplete="family-name"
+                value={passenger[`lastName${traveller}`]}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                name="phone"
-                label="Phone Number"
-                fullWidth
-                autoComplete="phone"
-                helperText="with country code"
-              />
+              <Box mb={6}>
+                <TextField
+                  required
+                  name={`passport${traveller}`}
+                  label="Passport"
+                  fullWidth
+                  value={passenger[`passport${traveller}`]}
+                  onChange={handleChange}
+                />
+              </Box>
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                name="passport"
-                label="Passport Number"
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <Box mb={4}>
                 <FormControlLabel
                   control={
@@ -68,7 +78,7 @@ const TravellersForm = () => {
                   label="Main contact person"
                 />
               </Box>
-            </Grid>
+            </Grid> */}
           </Grid>
         </>
       ))}

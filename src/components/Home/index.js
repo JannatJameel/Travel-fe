@@ -8,7 +8,6 @@ import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -39,7 +38,6 @@ const Home = () => {
   };
 
   const allAirports = useSelector((state) => state.flight.airports);
-  console.log(allAirports);
   const departureAirports = allAirports.map((airport) => airport.location);
   const arrivalAirports = departureAirports.filter(
     (airport) => airport !== flight.departureAirport
@@ -47,7 +45,6 @@ const Home = () => {
 
   const handleSubmit = () => {
     dispatch(searchDepartures(flight));
-    // dispatch(searchReturns(flight));
     if (roundtrip) dispatch(searchReturns(flight));
     localStorage.setItem("passengers", flight.passengers);
     localStorage.setItem("class", flight.flightClass);

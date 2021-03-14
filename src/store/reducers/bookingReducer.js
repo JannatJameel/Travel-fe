@@ -2,6 +2,7 @@ import * as types from "../types";
 
 const initialState = {
   bookings: [],
+  passengers: [],
 };
 
 const bookingReducer = (state = initialState, action) => {
