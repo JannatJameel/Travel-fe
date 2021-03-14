@@ -55,6 +55,7 @@ export const checkForToken = () => (dispatch) => {
     const currentTime = Date.now();
     if (currentTime <= user.exp) {
       dispatch(setUser(token));
+      dispatch(fetchProfile());
     } else {
       localStorage.removeItem("myToken");
       dispatch(signout());
@@ -72,6 +73,21 @@ export const fetchProfile = () => {
       });
     } catch (error) {
       console.error(error);
+    }
+  };
+};
+
+export const updateProfile = (updatedProfile) => {
+  return async (dispatch) => {
+    try {
+      const res = await instance.put("/update", updatedProfile);
+      console.log("new profile from be", res.data);
+      dispatch({
+        type: types.UPDATE_PROFILE,
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log("error:", error);
     }
   };
 };

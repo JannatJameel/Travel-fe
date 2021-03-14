@@ -17,6 +17,11 @@ const authReducer = (state = initialState, action) => {
         ...state,
         profile: action.payload,
       };
+    case types.UPDATE_PROFILE:
+      return {
+        ...state,
+        profile: action.payload,
+      };
     default:
       return state;
   }

@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { updateProfile } from "../../store/actions/authActions";
+
 // Styling
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
@@ -20,11 +22,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UserDetails = ({ setEdit }) => {
+const UserForm = ({ setEdit }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const profile = useSelector((state) => state.user.profile);
   const [userProfile, setuserProfile] = useState(profile);
 
+  const handleChange = (event) =>
+    setuserProfile({ ...userProfile, [event.target.name]: event.target.value });
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(updateProfile(userProfile));
+    setEdit(false);
+  };
+
+  console.log(userProfile);
   return (
     <div>
       {/* <div>
@@ -68,7 +81,7 @@ const UserDetails = ({ setEdit }) => {
       <Button className={classes.button} variant="contained" color="primary">
         Edit
       </Button> */}
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label className="form-label">First Name:</label>
           <input
@@ -76,8 +89,7 @@ const UserDetails = ({ setEdit }) => {
             value={userProfile.firstName}
             name="firstName"
             className="form-control"
-            disabled="disabled"
-            // onChange={handleChange}
+            onChange={handleChange}
           />
         </div>
         <div className="mb-3">
@@ -87,8 +99,7 @@ const UserDetails = ({ setEdit }) => {
             value={userProfile.lastName}
             name="firstName"
             className="form-control"
-            disabled="disabled"
-            // onChange={handleChange}
+            onChange={handleChange}
           />
         </div>
         <div className="mb-3">
@@ -98,8 +109,7 @@ const UserDetails = ({ setEdit }) => {
             value={userProfile.username}
             name="username"
             className="form-control"
-            disabled="disabled"
-            // onChange={handleChange}
+            onChange={handleChange}
           />
         </div>
         <div className="mb-3">
@@ -109,21 +119,29 @@ const UserDetails = ({ setEdit }) => {
             value={userProfile.email}
             name="email"
             className="form-control"
-            disabled="disabled"
-            // onChange={handleChange}
+            onChange={handleChange}
           />
         </div>
         <Button
           className={classes.button}
           variant="contained"
           color="primary"
-          onClick={() => setEdit(true)}
+          type="submit"
         >
           Edit
+        </Button>
+        <Button
+          className={classes.button}
+          variant="contained"
+          color="primary"
+          type="submit"
+          onClick={() => setEdit(false)}
+        >
+          Cancel
         </Button>
       </form>
     </div>
   );
 };
 
-export default UserDetails;
+export default UserForm;

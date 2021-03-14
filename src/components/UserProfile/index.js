@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 // Styling
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -10,6 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 // Components
 import UserDetails from "./UserDetails";
+import UserForm from "./UserForm";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -52,9 +52,8 @@ const useStyles = makeStyles(() => ({
 
 const UserProfile = () => {
   const classes = useStyles();
-  const profile = useSelector((state) => state.user.profile);
-
   const [value, setValue] = useState(0);
+  const [edit, setEdit] = useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -73,7 +72,8 @@ const UserProfile = () => {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <UserDetails />
+        {!edit && <UserDetails setEdit={setEdit} />}
+        {edit && <UserForm setEdit={setEdit} />}
       </TabPanel>
       <TabPanel value={value} index={1}>
         Trips History
