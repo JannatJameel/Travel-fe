@@ -39,6 +39,7 @@ const Home = () => {
   };
 
   const allAirports = useSelector((state) => state.flight.airports);
+  console.log(allAirports);
   const departureAirports = allAirports.map((airport) => airport.location);
   const arrivalAirports = departureAirports.filter(
     (airport) => airport !== flight.departureAirport
@@ -46,10 +47,10 @@ const Home = () => {
 
   const handleSubmit = () => {
     dispatch(searchDepartures(flight));
-    dispatch(searchReturns(flight));
-    // flight.hasOwnProperty("returnDate") ?? dispatch(searchReturns(flight));
+    // dispatch(searchReturns(flight));
+    if (roundtrip) dispatch(searchReturns(flight));
     localStorage.setItem("passengers", flight.passengers);
-    // alert("Helloo");
+    localStorage.setItem("class", flight.flightClass);
     history.push("/departure-flights");
   };
 

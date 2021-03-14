@@ -2,6 +2,7 @@ import * as types from "../types";
 
 const initialState = {
   user: null,
+  profile: {},
 };
 
 const authReducer = (state = initialState, action) => {

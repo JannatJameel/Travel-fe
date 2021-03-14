@@ -86,17 +86,20 @@ const Checkout = () => {
       ? (cart = [
           {
             flightId: bookings[0].id,
-            passengers: localStorage.getItem("passengers"),
+            flightClass: localStorage.getItem("class"),
+            passengers: parseInt(localStorage.getItem("passengers")),
           },
           {
             flightId: bookings[1].id,
-            passengers: localStorage.getItem("passengers"),
+            flightClass: localStorage.getItem("class"),
+            passengers: parseInt(localStorage.getItem("passengers")),
           },
         ])
       : (cart = [
           {
             flightId: bookings[0].id,
-            passengers: localStorage.getItem("passengers"),
+            flightClass: localStorage.getItem("class"),
+            passengers: parseInt(localStorage.getItem("passengers")),
           },
         ]);
     dispatch(checkout(cart));
