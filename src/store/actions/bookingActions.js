@@ -1,10 +1,13 @@
 import instance from "./instance";
 import * as types from "../types";
 
-export const addFlight = (newFlight) => ({
-  type: types.ADD_FLIGHT,
-  payload: newFlight,
-});
+export const addFlight = (newFlight) => {
+  localStorage.setItem("cartItems", true);
+  return {
+    type: types.ADD_FLIGHT,
+    payload: newFlight,
+  };
+};
 
 export const checkout = (cart) => {
   return async (dispatch) => {

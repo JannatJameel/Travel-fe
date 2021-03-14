@@ -5,7 +5,8 @@ import Signin from "./authentication/Signin";
 import Signup from "./authentication/Signup";
 import DepartureFlights from "./FlightList/DepartureFlights";
 import ReturnFlights from "./FlightList/ReturnFlights";
-import Booking from "./Booking";
+import FlightReview from "./Booking/FlightReview";
+import Checkout from "./Booking/Checkout";
 
 const Routes = () => {
   return (
@@ -17,7 +18,10 @@ const Routes = () => {
         <ReturnFlights />
       </Route>
       <Route path="/booking">
-        <Booking />
+        <FlightReview />
+      </Route>
+      <Route path="/checkout">
+        <Checkout />
       </Route>
       <Route path="/signin">
         <Signin />

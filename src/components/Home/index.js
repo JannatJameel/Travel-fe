@@ -47,7 +47,9 @@ const Home = () => {
   const handleSubmit = () => {
     dispatch(searchDepartures(flight));
     dispatch(searchReturns(flight));
+    // flight.hasOwnProperty("returnDate") ?? dispatch(searchReturns(flight));
     localStorage.setItem("passengers", flight.passengers);
+    // alert("Helloo");
     history.push("/departure-flights");
   };
 

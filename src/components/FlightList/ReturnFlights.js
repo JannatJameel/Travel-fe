@@ -1,33 +1,24 @@
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 // Components
 import FlightCard from "./FlightCard";
 
 const ReturnFlights = () => {
+  const history = useHistory();
   const returnFlights = useSelector((state) => state.flight.returnFlights);
-  console.log("Test reutrn flights", returnFlights);
   const bookings = useSelector((state) => state.booking.bookings);
-  console.log("Test booking", bookings);
+
+  if (returnFlights.length === 0) history.replace("/booking");
+
   const minTime =
     Date.parse([bookings[0].arrivalDate, bookings[0].arrivalTime].join(" ")) +
     7200000;
-
-  console.log("Test min Time", minTime);
 
   const availableFlights = returnFlights.filter(
     (flight) =>
       Date.parse([flight.departureDate, flight.departureTime].join(" ")) >=
       minTime
   );
-  console.log(
-    "Test return time",
-    Date.parse(
-      [
-        availableFlights[0].departureDate,
-        availableFlights[0].departureTime,
-      ].join(" ")
-    )
-  );
-  console.log("Test availble flight", availableFlights);
 
   return (
     <div>
