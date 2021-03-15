@@ -81,9 +81,23 @@ export const updateProfile = (updatedProfile) => {
   return async (dispatch) => {
     try {
       const res = await instance.put("/update", updatedProfile);
-      console.log("new profile from be", res.data);
       dispatch({
         type: types.UPDATE_PROFILE,
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log("error:", error);
+    }
+  };
+};
+
+export const userHistory = () => {
+  return async (dispatch) => {
+    try {
+      const res = await instance.get("/history");
+      console.log("flights history from be", res.data);
+      dispatch({
+        type: types.FETCH_HISTORY,
         payload: res.data,
       });
     } catch (error) {

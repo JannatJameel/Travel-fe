@@ -1,6 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { signout, fetchProfile } from "../../store/actions/authActions";
+import {
+  signout,
+  fetchProfile,
+  userHistory,
+} from "../../store/actions/authActions";
 import { FaUserAstronaut } from "react-icons/fa";
 //Styling
 import { makeStyles } from "@material-ui/core/styles";
@@ -35,6 +39,7 @@ const NavBar = () => {
 
   const handleProfile = () => {
     dispatch(fetchProfile());
+    dispatch(userHistory());
     history.push("/my-profile");
   };
 
