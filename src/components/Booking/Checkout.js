@@ -14,7 +14,7 @@ import Typography from "@material-ui/core/Typography";
 // Components
 import BookingReview from "./BookingReview";
 import PaymentForm from "./PaymentForm";
-import TravellersForm from "./TravellersForm";
+import PassengersForm from "./PassengersForm";
 
 const useStyles = makeStyles((theme) => ({
   layout: {
@@ -55,7 +55,7 @@ const steps = ["Travellers details", "Payment details", "Review all trips"];
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return <TravellersForm />;
+      return <PassengersForm />;
     case 1:
       return <PaymentForm />;
     case 2:

@@ -23,6 +23,11 @@ const authReducer = (state = initialState, action) => {
         ...state,
         profile: action.payload,
       };
+    case types.FETCH_HISTORY:
+      return {
+        ...state,
+        history: action.payload,
+      };
     default:
       return state;
   }

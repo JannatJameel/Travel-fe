@@ -95,7 +95,6 @@ export const userHistory = () => {
   return async (dispatch) => {
     try {
       const res = await instance.get("/history");
-      console.log("flights history from be", res.data);
       dispatch({
         type: types.FETCH_HISTORY,
         payload: res.data,

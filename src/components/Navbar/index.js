@@ -53,7 +53,7 @@ const NavBar = () => {
           {user ? (
             <>
               <IconButton onClick={handleProfile}>
-                <FaUserAstronaut color="#fff" size="1em" />
+                <FaUserAstronaut color="#fff" size="0.9em" />
               </IconButton>
 
               <Button color="inherit" onClick={handleSignout}>

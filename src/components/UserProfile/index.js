@@ -10,6 +10,7 @@ import Box from "@material-ui/core/Box";
 // Components
 import UserDetails from "./UserDetails";
 import UserForm from "./UserForm";
+import FlightHistory from "./FlightHistory";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -76,7 +77,7 @@ const UserProfile = () => {
         {edit && <UserForm setEdit={setEdit} />}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Trips History
+        <FlightHistory />
       </TabPanel>
     </div>
   );

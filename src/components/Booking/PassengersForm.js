@@ -6,7 +6,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Box from "@material-ui/core/Box";
 
-const TravellersForm = () => {
+const PassengersForm = () => {
   const passengers = localStorage.getItem("passengers");
 
   const count = [];
@@ -76,4 +76,4 @@ const TravellersForm = () => {
   );
 };
 
-export default TravellersForm;
+export default PassengersForm;
