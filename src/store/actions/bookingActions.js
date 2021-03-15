@@ -10,6 +10,7 @@ export const addFlight = (newFlight) => {
 };
 
 export const checkout = (cart) => {
+  console.log("test", cart);
   return async (dispatch) => {
     try {
       await instance.post("/checkout", cart);
