@@ -11,16 +11,16 @@ const DepartureFlights = () => {
     (state) => state.flight.departureFlights
   );
 
-  if (departureFlights.length === 0) {
-    alert("No flights found try another search.");
-    history.replace("/");
-  }
-
   const availableFlights = departureFlights.filter(
     (flight) =>
       Date.parse([flight.departureDate, flight.departureTime].join(" ")) >=
       Date.parse(new Date()) + 7200000
   );
+
+  // if (availableFlights.length === 0) {
+  //   alert("No flights found try another search.");
+  //   history.replace("/");
+  // }
 
   return (
     <div>
