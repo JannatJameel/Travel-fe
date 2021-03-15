@@ -48,6 +48,48 @@ export const signout = () => {
   };
 };
 
+export const fetchProfile = () => {
+  return async (dispatch) => {
+    try {
+      const res = await instance.get("/profile");
+      dispatch({
+        type: types.FETCH_PROFILE,
+        payload: res.data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const updateProfile = (updatedProfile) => {
+  return async (dispatch) => {
+    try {
+      const res = await instance.put("/update", updatedProfile);
+      dispatch({
+        type: types.UPDATE_PROFILE,
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log("error:", error);
+    }
+  };
+};
+
+export const userHistory = () => {
+  return async (dispatch) => {
+    try {
+      const res = await instance.get("/history");
+      dispatch({
+        type: types.FETCH_HISTORY,
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log("error:", error);
+    }
+  };
+};
+
 export const checkForToken = () => (dispatch) => {
   const token = localStorage.getItem("myToken");
   if (token) {
@@ -55,6 +97,8 @@ export const checkForToken = () => (dispatch) => {
     const currentTime = Date.now();
     if (currentTime <= user.exp) {
       dispatch(setUser(token));
+      dispatch(fetchProfile());
+      dispatch(userHistory());
     } else {
       localStorage.removeItem("myToken");
       dispatch(signout());

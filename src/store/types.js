@@ -9,4 +9,6 @@ export const FETCH_BOOKINGS = "FETCH_BOOKINGS";
 export const CHECKOUT = "CHECKOUT";
 
 export const SET_USER = "SET_USER";
-export const UPDATE_USER = "UPDATE_USER";
+export const FETCH_PROFILE = "FETCH_PROFILE";
+export const UPDATE_PROFILE = "UPDATE_PROFILE";
+export const FETCH_HISTORY = "FETCH_HISTORY";
