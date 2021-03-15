@@ -8,10 +8,10 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
-  //   root: {
-  //     display: "flex",
-  //     flexWrap: "wrap",
-  //   },
+  // root: {
+  //   display: "flex",
+  //   flexWrap: "wrap",
+  // },
   textField: {
     marginLeft: "40%",
     width: "40ch",
@@ -31,115 +31,71 @@ const UserForm = ({ setEdit }) => {
   const handleChange = (event) =>
     setuserProfile({ ...userProfile, [event.target.name]: event.target.value });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = () => {
     dispatch(updateProfile(userProfile));
     setEdit(false);
   };
 
-  console.log(userProfile);
   return (
     <div>
-      {/* <div>
+      <div>
         <TextField
           id="first-name"
           label="First Name"
-          defaultValue={test}
+          name="firstName"
           className={classes.textField}
           margin="normal"
           variant="outlined"
-          disabled
+          value={userProfile.firstName}
+          onChange={handleChange}
         />
         <TextField
           id="last-name"
           label="Last Name"
-          defaultValue="Jameel"
+          name="lastName"
           className={classes.textField}
           margin="normal"
           variant="outlined"
-          disabled
+          value={userProfile.lastName}
+          onChange={handleChange}
         />
         <TextField
           id="username"
           label="Username"
-          defaultValue="Jannat"
+          name="username"
           className={classes.textField}
           margin="normal"
           variant="outlined"
-          disabled
+          value={userProfile.username}
+          onChange={handleChange}
         />
         <TextField
           id="email"
           label="Email"
-          defaultValue="jannat@gmail.com"
+          name="email"
           className={classes.textField}
           margin="normal"
           variant="outlined"
-          disabled
+          value={userProfile.email}
+          onChange={handleChange}
         />
       </div>
-      <Button className={classes.button} variant="contained" color="primary">
+      <Button
+        className={classes.button}
+        variant="contained"
+        color="primary"
+        onClick={handleSubmit}
+      >
         Edit
-      </Button> */}
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label className="form-label">First Name:</label>
-          <input
-            type="text"
-            value={userProfile.firstName}
-            name="firstName"
-            className="form-control"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Last Name:</label>
-          <input
-            type="text"
-            value={userProfile.lastName}
-            name="firstName"
-            className="form-control"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Username:</label>
-          <input
-            type="text"
-            value={userProfile.username}
-            name="username"
-            className="form-control"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Email:</label>
-          <input
-            type="email"
-            value={userProfile.email}
-            name="email"
-            className="form-control"
-            onChange={handleChange}
-          />
-        </div>
-        <Button
-          className={classes.button}
-          variant="contained"
-          color="primary"
-          type="submit"
-        >
-          Edit
-        </Button>
-        <Button
-          className={classes.button}
-          variant="contained"
-          color="primary"
-          type="submit"
-          onClick={() => setEdit(false)}
-        >
-          Cancel
-        </Button>
-      </form>
+      </Button>
+      <Button
+        className={classes.button}
+        variant="contained"
+        color="primary"
+        onClick={() => setEdit(false)}
+      >
+        Cancel
+      </Button>
     </div>
   );
 };

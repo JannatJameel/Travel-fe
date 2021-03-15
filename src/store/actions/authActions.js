@@ -48,21 +48,6 @@ export const signout = () => {
   };
 };
 
-export const checkForToken = () => (dispatch) => {
-  const token = localStorage.getItem("myToken");
-  if (token) {
-    const user = decode(token);
-    const currentTime = Date.now();
-    if (currentTime <= user.exp) {
-      dispatch(setUser(token));
-      dispatch(fetchProfile());
-    } else {
-      localStorage.removeItem("myToken");
-      dispatch(signout());
-    }
-  }
-};
-
 export const fetchProfile = () => {
   return async (dispatch) => {
     try {
@@ -103,4 +88,20 @@ export const userHistory = () => {
       console.log("error:", error);
     }
   };
+};
+
+export const checkForToken = () => (dispatch) => {
+  const token = localStorage.getItem("myToken");
+  if (token) {
+    const user = decode(token);
+    const currentTime = Date.now();
+    if (currentTime <= user.exp) {
+      dispatch(setUser(token));
+      dispatch(fetchProfile());
+      dispatch(userHistory());
+    } else {
+      localStorage.removeItem("myToken");
+      dispatch(signout());
+    }
+  }
 };
