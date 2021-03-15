@@ -44,7 +44,7 @@ const Home = () => {
   );
 
   const handleSubmit = () => {
-    dispatch(searchDepartures(flight));
+    dispatch(searchDepartures(flight, history));
     if (roundtrip) dispatch(searchReturns(flight));
     localStorage.setItem("passengers", flight.passengers);
     localStorage.setItem("class", flight.flightClass);

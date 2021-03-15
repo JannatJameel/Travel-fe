@@ -11,27 +11,24 @@ const PassengersForm = () => {
   const count = [];
   while (count.length < passengersNum) count.push(`${count.length + 1}`);
 
-  let index = 0;
   const passenger = [];
   while (passenger.length < passengersNum) {
     passenger.push({
-      index: index,
       firstName: "",
       lastName: "",
       passport: "",
     });
-    index++;
   }
-
+  console.log("passenger", passenger);
   const [passengers, setPassengers] = useState(passenger);
-  const [test, setTest] = useState(passenger[0]);
 
-  const handleChange = (event) =>
-    setPassengers([
-      ...passengers,
-      { ...passengers[0], [event.target.name]: event.target.value },
-    ]);
-  console.log("Test", [{ ...passenger[0], firstName: "Hi Hi" }]);
+  const handleChange = (event, i) => {
+    console.log("event", event.target);
+    passengers[i][event.target.name] = event.target.value;
+    console.log("first passenger", passengers[0]);
+    setPassengers(passengers);
+  };
+  // console.log("Test", [{ ...passenger[0], firstName: "Hi Hi" }]);
 
   console.log("Passengers array", passengers);
 
@@ -50,31 +47,36 @@ const PassengersForm = () => {
                 label="First name"
                 fullWidth
                 autoComplete="given-name"
-                // value={test.firstName}
                 value={passengers[parseInt(traveller) - 1].firstName}
-                onChange={handleChange}
+                onChange={(event) =>
+                  handleChange(event, parseInt(traveller) - 1)
+                }
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
                 required
-                name={`lastName${traveller}`}
+                name="lastName"
                 label="Last name"
                 fullWidth
                 autoComplete="family-name"
-                value={passenger[`lastName${traveller}`]}
-                onChange={handleChange}
+                value={passengers[parseInt(traveller) - 1].lastName}
+                onChange={(event) =>
+                  handleChange(event, parseInt(traveller) - 1)
+                }
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <Box mb={6}>
                 <TextField
                   required
-                  name={`passport${traveller}`}
+                  name="passport"
                   label="Passport"
                   fullWidth
-                  value={passenger[`passport${traveller}`]}
-                  onChange={handleChange}
+                  value={passengers[parseInt(traveller) - 1].passport}
+                  onChange={(event) =>
+                    handleChange(event, parseInt(traveller) - 1)
+                  }
                 />
               </Box>
             </Grid>

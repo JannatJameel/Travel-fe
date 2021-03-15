@@ -83,25 +83,31 @@ const Checkout = () => {
   const handleCheckout = () => {
     let cart = [];
     bookings.length === 2
-      ? (cart = [
-          {
-            flightId: bookings[0].id,
-            flightClass: localStorage.getItem("class"),
-            passengers: parseInt(localStorage.getItem("passengers")),
-          },
-          {
-            flightId: bookings[1].id,
-            flightClass: localStorage.getItem("class"),
-            passengers: parseInt(localStorage.getItem("passengers")),
-          },
-        ])
-      : (cart = [
-          {
-            flightId: bookings[0].id,
-            flightClass: localStorage.getItem("class"),
-            passengers: parseInt(localStorage.getItem("passengers")),
-          },
-        ]);
+      ? (cart = {
+          flights: [
+            {
+              flightId: bookings[0].id,
+              flightClass: localStorage.getItem("class"),
+              passengers: parseInt(localStorage.getItem("passengers")),
+            },
+            {
+              flightId: bookings[1].id,
+              flightClass: localStorage.getItem("class"),
+              passengers: parseInt(localStorage.getItem("passengers")),
+            },
+          ],
+          passengers: [],
+        })
+      : (cart = {
+          flights: [
+            {
+              flightId: bookings[0].id,
+              flightClass: localStorage.getItem("class"),
+              passengers: parseInt(localStorage.getItem("passengers")),
+            },
+          ],
+          passengers: [],
+        });
     dispatch(checkout(cart));
     history.replace("/");
     alert("Thank you for booking with us!");
