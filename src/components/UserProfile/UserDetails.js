@@ -31,25 +31,27 @@ const UserDetails = ({ setEdit }) => {
         <TextField
           id="first-name"
           label="First Name"
-          defaultValue={test}
+          // defaultValue="Jannat"
           className={classes.textField}
           margin="normal"
           variant="outlined"
+          value={userProfile.firstName}
           disabled
         />
         <TextField
           id="last-name"
           label="Last Name"
-          defaultValue="Jameel"
+          // defaultValue="Jameel"
           className={classes.textField}
           margin="normal"
           variant="outlined"
+          value={userProfile.lastName}
           disabled
         />
         <TextField
           id="username"
           label="Username"
-          defaultValue="Jannat"
+          // defaultValue="Jannat"
           className={classes.textField}
           margin="normal"
           variant="outlined"
@@ -58,7 +60,7 @@ const UserDetails = ({ setEdit }) => {
         <TextField
           id="email"
           label="Email"
-          defaultValue="jannat@gmail.com"
+          // defaultValue="jannat@gmail.com"
           className={classes.textField}
           margin="normal"
           variant="outlined"
