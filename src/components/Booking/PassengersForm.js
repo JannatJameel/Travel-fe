@@ -3,24 +3,36 @@ import { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Box from "@material-ui/core/Box";
 
-const TravellersForm = () => {
+const PassengersForm = () => {
   const passengersNum = localStorage.getItem("passengers");
 
   const count = [];
   while (count.length < passengersNum) count.push(`${count.length + 1}`);
 
+  let index = 0;
   const passenger = [];
-  while (passenger.length < passengersNum)
-    passenger.push({ firstName: "", lastName: "", passport: "" });
+  while (passenger.length < passengersNum) {
+    passenger.push({
+      index: index,
+      firstName: "",
+      lastName: "",
+      passport: "",
+    });
+    index++;
+  }
 
   const [passengers, setPassengers] = useState(passenger);
+  const [test, setTest] = useState(passenger[0]);
 
   const handleChange = (event) =>
-    setPassengers({ ...passenger, [event.target.name]: event.target.value });
+    setPassengers([
+      ...passengers,
+      { ...passengers[0], [event.target.name]: event.target.value },
+    ]);
+  console.log("Test", [{ ...passenger[0], firstName: "Hi Hi" }]);
+
   console.log("Passengers array", passengers);
 
   return (
@@ -38,6 +50,7 @@ const TravellersForm = () => {
                 label="First name"
                 fullWidth
                 autoComplete="given-name"
+                // value={test.firstName}
                 value={passengers[parseInt(traveller) - 1].firstName}
                 onChange={handleChange}
               />
@@ -65,20 +78,6 @@ const TravellersForm = () => {
                 />
               </Box>
             </Grid>
-            {/* <Grid item xs={12}>
-              <Box mb={4}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      color="secondary"
-                      name="saveAddress"
-                      value="yes"
-                    />
-                  }
-                  label="Main contact person"
-                />
-              </Box>
-            </Grid> */}
           </Grid>
         </>
       ))}
@@ -86,4 +85,4 @@ const TravellersForm = () => {
   );
 };
 
-export default TravellersForm;
+export default PassengersForm;
