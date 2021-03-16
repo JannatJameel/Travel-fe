@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { searchDepartures } from "../../store/actions/flightActions";
-import { searchReturns } from "../../store/actions/flightActions";
+import {
+  searchDepartures,
+  searchReturns,
+  airlineFlights,
+} from "../../store/actions/flightActions";
 // Styling
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
@@ -26,6 +29,14 @@ const Home = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const user = useSelector((state) => state.user.user);
+  let isAirline = null;
+  if (user !== null) isAirline = user.isAirline;
+  if (isAirline === true) {
+    dispatch(airlineFlights());
+    history.replace("/dashboard");
+  }
 
   const [roundtrip, setRoundtrip] = useState(false);
 
@@ -55,8 +66,7 @@ const Home = () => {
     <Container maxWidth="md">
       <div class="card w-75">
         <div class="card-body">
-          <h5 class="card-title">Flights</h5>
-
+          <br />
           <Button onClick={() => setRoundtrip(true)} color="primary">
             Roundtrip
           </Button>

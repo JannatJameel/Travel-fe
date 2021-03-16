@@ -1,5 +1,4 @@
 import { useState } from "react";
-import decode from "jwt-decode";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { checkout } from "../../store/actions/bookingActions";
@@ -70,12 +69,12 @@ const Checkout = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
+  const user = useSelector((state) => state.user.user);
   const bookings = useSelector((state) => state.booking.bookings);
   const passengers = useSelector((state) => state.booking.passengers);
 
-  const token = localStorage.getItem("myToken");
   let userId = null;
-  if (token !== null) userId = decode(localStorage.getItem("myToken")).id;
+  if (user !== null) userId = user.id;
 
   const [activeStep, setActiveStep] = useState(0);
 

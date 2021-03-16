@@ -4,6 +4,7 @@ import Home from "./Home";
 import Signin from "./authentication/Signin";
 import Signup from "./authentication/Signup";
 import UserProfile from "./UserProfile";
+import AirlineProfile from "./AirlineProfile";
 import DepartureFlights from "./FlightList/DepartureFlights";
 import ReturnFlights from "./FlightList/ReturnFlights";
 import FlightReview from "./Booking/FlightReview";
@@ -26,6 +27,9 @@ const Routes = () => {
       </Route>
       <Route path="/my-profile">
         <UserProfile />
+      </Route>
+      <Route path="/dashboard">
+        <AirlineProfile />
       </Route>
       <Route path="/signin">
         <Signin />
