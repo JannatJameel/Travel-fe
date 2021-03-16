@@ -1,12 +1,8 @@
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-
 // Components
 import FlightCard from "./FlightCard";
 
 const DepartureFlights = () => {
-  const history = useHistory();
-
   const departureFlights = useSelector(
     (state) => state.flight.departureFlights
   );

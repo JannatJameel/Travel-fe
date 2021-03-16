@@ -25,6 +25,9 @@ const FlightCard = ({ flight }) => {
         <Grid container spacing={1}>
           <Grid item xs={6}>
             <Typography gutterBottom variant="subtitle1">
+              {flight.departureDate.split("-").reverse().join("-")}
+            </Typography>
+            <Typography gutterBottom variant="subtitle1">
               {flight.departureTime} - {flight.arrivalTime}
             </Typography>
             <Typography variant="body2" gutterBottom>
@@ -42,6 +45,8 @@ const FlightCard = ({ flight }) => {
             </Typography> */}
           </Grid>
           <Grid item xs>
+            <br />
+            <br />
             <Typography variant="subtitle1">BD {flight.price}</Typography>
             <Typography variant="body2" color="textSecondary">
               Per Traveller

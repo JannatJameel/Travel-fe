@@ -28,6 +28,9 @@ const FlightCard = ({ flight, isReturnFlight }) => {
     dispatch(addFlight(flight));
     isReturnFlight ? history.push("/booking") : history.push("/return-flights");
   };
+
+  const flightClass = localStorage.getItem("class");
+
   return (
     <div margin="10">
       <Paper className={classes.paper} onClick={handleAddFlight}>
@@ -51,7 +54,12 @@ const FlightCard = ({ flight, isReturnFlight }) => {
             </Typography> */}
           </Grid>
           <Grid item xs>
-            <Typography variant="subtitle1">BD {flight.price}</Typography>
+            <Typography variant="subtitle1">
+              BD{" "}
+              {flightClass === "economy"
+                ? flight.priceEconomy
+                : flight.priceBusiness}
+            </Typography>
             <Typography variant="body2" color="textSecondary">
               Per Traveller
             </Typography>

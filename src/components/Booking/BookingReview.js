@@ -23,7 +23,7 @@ const BookingReview = () => {
   const bookings = useSelector((state) => state.booking.bookings);
   const passengers = localStorage.getItem("passengers");
   const flightClass = localStorage.getItem("class");
-
+  
   const count = [];
   while (count.length < passengers) count.push(`${count.length + 1}`);
 
@@ -45,6 +45,7 @@ const BookingReview = () => {
           departure: `${bookings[0].departureAirport["location"]} - ${bookings[0].arrivalAirport["location"]}`,
           return: `${bookings[1].departureAirport["location"]} - ${bookings[1].arrivalAirport["location"]}`,
           price: `BD ${price * 2}`,
+
         })
       : travellers.push({
           name: `Traveller ${traveller}`,
@@ -69,7 +70,7 @@ const BookingReview = () => {
         <ListItem className={classes.listItem}>
           <ListItemText primary="Trip Total" />
           <Typography variant="subtitle1" className={classes.total}>
-            BD {total}
+            BD {price * passengers}
           </Typography>
         </ListItem>
       </List>
