@@ -23,14 +23,19 @@ const BookingReview = () => {
   const bookings = useSelector((state) => state.booking.bookings);
   const passengers = localStorage.getItem("passengers");
   const flightClass = localStorage.getItem("class");
+  
+  const count = [];
+  while (count.length < passengers) count.push(`${count.length + 1}`);
 
   let price = 0;
   flightClass === "economy"
-    ? (price = 2 * bookings[0].priceEconomy)
-    : (price = 2 * bookings[0].priceBusiness);
+    ? (price = bookings[0].priceEconomy)
+    : (price = bookings[0].priceBusiness);
 
-  const count = [];
-  while (count.length < passengers) count.push(`${count.length + 1}`);
+  let total = 0;
+  bookings.length === 2
+    ? (total = 2 * price * passengers)
+    : (total = price * passengers);
 
   const travellers = [];
   count.map((traveller) =>
@@ -39,7 +44,8 @@ const BookingReview = () => {
           name: `Traveller ${traveller}`,
           departure: `${bookings[0].departureAirport["location"]} - ${bookings[0].arrivalAirport["location"]}`,
           return: `${bookings[1].departureAirport["location"]} - ${bookings[1].arrivalAirport["location"]}`,
-          price: `BD ${price}`,
+          price: `BD ${price * 2}`,
+
         })
       : travellers.push({
           name: `Traveller ${traveller}`,

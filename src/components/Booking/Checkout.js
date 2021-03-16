@@ -70,6 +70,8 @@ const Checkout = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const bookings = useSelector((state) => state.booking.bookings);
+  const passengers = useSelector((state) => state.booking.passengers);
+
   const [activeStep, setActiveStep] = useState(0);
 
   const handleNext = () => {
@@ -83,25 +85,31 @@ const Checkout = () => {
   const handleCheckout = () => {
     let cart = [];
     bookings.length === 2
-      ? (cart = [
-          {
-            flightId: bookings[0].id,
-            flightClass: localStorage.getItem("class"),
-            passengers: parseInt(localStorage.getItem("passengers")),
-          },
-          {
-            flightId: bookings[1].id,
-            flightClass: localStorage.getItem("class"),
-            passengers: parseInt(localStorage.getItem("passengers")),
-          },
-        ])
-      : (cart = [
-          {
-            flightId: bookings[0].id,
-            flightClass: localStorage.getItem("class"),
-            passengers: parseInt(localStorage.getItem("passengers")),
-          },
-        ]);
+      ? (cart = {
+          flights: [
+            {
+              flightId: bookings[0].id,
+              flightClass: localStorage.getItem("class"),
+              passengers: parseInt(localStorage.getItem("passengers")),
+            },
+            {
+              flightId: bookings[1].id,
+              flightClass: localStorage.getItem("class"),
+              passengers: parseInt(localStorage.getItem("passengers")),
+            },
+          ],
+          passengers: passengers,
+        })
+      : (cart = {
+          flights: [
+            {
+              flightId: bookings[0].id,
+              flightClass: localStorage.getItem("class"),
+              passengers: parseInt(localStorage.getItem("passengers")),
+            },
+          ],
+          passengers: passengers,
+        });
     dispatch(checkout(cart));
     history.replace("/");
     alert("Thank you for booking with us!");
