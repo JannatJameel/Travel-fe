@@ -39,15 +39,13 @@ const Home = () => {
   };
 
   const allAirports = useSelector((state) => state.flight.airports);
-  console.log(allAirports);
   const departureAirports = allAirports.map((airport) => airport.location);
   const arrivalAirports = departureAirports.filter(
     (airport) => airport !== flight.departureAirport
   );
 
   const handleSubmit = () => {
-    dispatch(searchDepartures(flight));
-    // dispatch(searchReturns(flight));
+    dispatch(searchDepartures(flight, history));
     if (roundtrip) dispatch(searchReturns(flight));
     localStorage.setItem("passengers", flight.passengers);
     localStorage.setItem("class", flight.flightClass);

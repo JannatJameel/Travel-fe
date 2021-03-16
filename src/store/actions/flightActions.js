@@ -1,10 +1,14 @@
 import instance from "./instance";
 import * as types from "../types";
 
-export const searchDepartures = (flight) => {
+export const searchDepartures = (flight, history) => {
   return async (dispatch) => {
     try {
       const res = await instance.get("/flights/departures", { params: flight });
+      if (res.data.length === 0) {
+        history.replace("/");
+        alert("No flights found try another search.");
+      }
       dispatch({
         type: types.FETCH_DEPARTURES,
         payload: res.data,
