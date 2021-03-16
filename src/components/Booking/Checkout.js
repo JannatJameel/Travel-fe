@@ -70,6 +70,8 @@ const Checkout = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const bookings = useSelector((state) => state.booking.bookings);
+  const passengers = useSelector((state) => state.booking.passengers);
+
   const [activeStep, setActiveStep] = useState(0);
 
   const handleNext = () => {
@@ -96,7 +98,7 @@ const Checkout = () => {
               passengers: parseInt(localStorage.getItem("passengers")),
             },
           ],
-          passengers: [],
+          passengers: passengers,
         })
       : (cart = {
           flights: [
@@ -106,7 +108,7 @@ const Checkout = () => {
               passengers: parseInt(localStorage.getItem("passengers")),
             },
           ],
-          passengers: [],
+          passengers: passengers,
         });
     dispatch(checkout(cart));
     history.replace("/");

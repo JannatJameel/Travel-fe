@@ -22,8 +22,20 @@ const BookingReview = () => {
   const classes = useStyles();
   const bookings = useSelector((state) => state.booking.bookings);
   const passengers = localStorage.getItem("passengers");
+  const flightClass = localStorage.getItem("class");
+
   const count = [];
   while (count.length < passengers) count.push(`${count.length + 1}`);
+
+  let price = 0;
+  flightClass === "economy"
+    ? (price = bookings[0].priceEconomy)
+    : (price = bookings[0].priceBusiness);
+
+  let total = 0;
+  bookings.length === 2
+    ? (total = 2 * price * passengers)
+    : (total = price * passengers);
 
   const travellers = [];
   count.map((traveller) =>
@@ -32,18 +44,14 @@ const BookingReview = () => {
           name: `Traveller ${traveller}`,
           departure: `${bookings[0].departureAirport["location"]} - ${bookings[0].arrivalAirport["location"]}`,
           return: `${bookings[1].departureAirport["location"]} - ${bookings[1].arrivalAirport["location"]}`,
-          price: `BD ${bookings[0].price + bookings[1].price}`,
+          price: `BD ${price * 2}`,
         })
       : travellers.push({
           name: `Traveller ${traveller}`,
           departure: `${bookings[0].departureAirport["location"]} - ${bookings[0].arrivalAirport["location"]}`,
-          price: `BD ${bookings[0].price}`,
+          price: `BD ${price}`,
         })
   );
-  let total = 0;
-  bookings.length === 2
-    ? (total = (bookings[0].price + bookings[1].price) * passengers)
-    : (total = bookings[0].price * passengers);
   return (
     <>
       <Typography variant="h6" gutterBottom>

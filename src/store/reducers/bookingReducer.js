@@ -17,6 +17,11 @@ const bookingReducer = (state = initialState, action) => {
         ...state,
         bookings: [],
       };
+    case types.SET_PASSENGERS:
+      return {
+        ...state,
+        passengers: action.payload,
+      };
     default:
       return state;
   }
