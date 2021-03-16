@@ -11,8 +11,6 @@ const FlightReview = () => {
   const bookings = useSelector((state) => state.booking.bookings);
   const token = localStorage.getItem("myToken");
 
-  console.log("token test", token);
-
   return (
     <>
       <h1>Review your trip</h1>

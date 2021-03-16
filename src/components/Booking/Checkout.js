@@ -1,4 +1,5 @@
 import { useState } from "react";
+import decode from "jwt-decode";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { checkout } from "../../store/actions/bookingActions";
@@ -72,6 +73,10 @@ const Checkout = () => {
   const bookings = useSelector((state) => state.booking.bookings);
   const passengers = useSelector((state) => state.booking.passengers);
 
+  const token = localStorage.getItem("myToken");
+  let userId = null;
+  if (token !== null) userId = decode(localStorage.getItem("myToken")).id;
+
   const [activeStep, setActiveStep] = useState(0);
 
   const handleNext = () => {
@@ -86,6 +91,7 @@ const Checkout = () => {
     let cart = [];
     bookings.length === 2
       ? (cart = {
+          user: userId,
           flights: [
             {
               flightId: bookings[0].id,
@@ -101,6 +107,7 @@ const Checkout = () => {
           passengers: passengers,
         })
       : (cart = {
+          user: userId,
           flights: [
             {
               flightId: bookings[0].id,
