@@ -1,6 +1,14 @@
 import instance from "./instance";
 import * as types from "../types";
 
+export const setSearch = (flight) => {
+  flight.passengers = flight.passengers.toString();
+  return {
+    type: types.SET_SEARCH,
+    payload: flight,
+  };
+};
+
 export const searchDepartures = (flight, history) => {
   return async (dispatch) => {
     try {

@@ -1,4 +1,5 @@
 export const FETCH_AIRPORTS = "FETCH_AIRPORTS";
+export const SET_SEARCH = "SET_SEARCH";
 export const FETCH_DEPARTURES = "FETCH_DEPARTURES";
 export const FETCH_RETURNS = "FETCH_RETURNS";
 export const CREATE_FLIGHT = "CREATE_FLIGHT";

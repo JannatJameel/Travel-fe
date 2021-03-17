@@ -1,6 +1,7 @@
 import * as types from "../types";
 
 const initialState = {
+  search: {},
   airports: [],
   departureFlights: [],
   returnFlights: [],
@@ -9,6 +10,11 @@ const initialState = {
 
 const flightReducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.SET_SEARCH:
+      return {
+        ...state,
+        search: action.payload,
+      };
     case types.FETCH_AIRPORTS:
       return {
         ...state,

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import {
+  setSearch,
   searchDepartures,
   searchReturns,
   airlineFlights,
@@ -19,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "wrap",
   },
   textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
+    // marginLeft: theme.spacing(1),
+    // marginRight: theme.spacing(1),
     width: 200,
   },
 }));
@@ -55,6 +56,7 @@ const Home = () => {
   );
 
   const handleSubmit = () => {
+    dispatch(setSearch(flight));
     dispatch(searchDepartures(flight, history));
     if (roundtrip) dispatch(searchReturns(flight));
     localStorage.setItem("passengers", flight.passengers);
@@ -73,7 +75,6 @@ const Home = () => {
           <Button onClick={() => setRoundtrip(false)} color="primary">
             One-way
           </Button>
-
           <br />
           {/* Departure Airport */}
           <Autocomplete
@@ -93,9 +94,7 @@ const Home = () => {
               />
             )}
           />
-
           <br />
-
           {/* Arrival Airport */}
           <Autocomplete
             id="arrivalAirports"
@@ -114,9 +113,7 @@ const Home = () => {
               />
             )}
           />
-
           <br />
-
           {/* Travellers */}
           <Autocomplete
             id="travellers"
@@ -131,9 +128,7 @@ const Home = () => {
               <TextField {...params} label="Travellers" variant="outlined" />
             )}
           />
-
           <br />
-
           {/* Flying Class */}
           <Autocomplete
             id="flightClass"
@@ -148,9 +143,7 @@ const Home = () => {
               <TextField {...params} label="Class" variant="outlined" />
             )}
           />
-
           <br />
-
           {/* Departure Date */}
           <TextField
             name="departureDate"
@@ -165,10 +158,8 @@ const Home = () => {
               shrink: true,
             }}
           />
-
           <br />
           <br />
-
           {/* Return Date */}
           {roundtrip && (
             <TextField
@@ -185,9 +176,7 @@ const Home = () => {
               }}
             />
           )}
-
-          <br />
-
+          <br /> <br />
           <Button onClick={handleSubmit} variant="contained" color="primary">
             Search
           </Button>

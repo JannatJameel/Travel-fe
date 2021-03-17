@@ -1,4 +1,5 @@
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   signout,
@@ -13,6 +14,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
+import { Box } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    color: "white",
   },
 }));
 
@@ -47,9 +50,11 @@ const NavBar = () => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            Time Travellers
-          </Typography>
+          <Link to={"/"} style={{ textDecoration: "none" }}>
+            <Typography variant="h6" className={classes.title}>
+              Time Travellers
+            </Typography>
+          </Link>
           {user ? (
             <>
               {!user.isAirline && (
@@ -62,9 +67,11 @@ const NavBar = () => {
               </Button>
             </>
           ) : (
-            <Button color="inherit" href="/signin">
-              Sign in
-            </Button>
+            <Box ml={147}>
+              <Button color="inherit" href="/signin">
+                Sign in
+              </Button>
+            </Box>
           )}
         </Toolbar>
       </AppBar>
