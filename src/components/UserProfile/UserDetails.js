@@ -34,6 +34,9 @@ const UserDetails = ({ setEdit }) => {
           variant="outlined"
           value={profile.firstName}
           disabled
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
         <TextField
           id="last-name"
@@ -43,6 +46,9 @@ const UserDetails = ({ setEdit }) => {
           variant="outlined"
           value={profile.lastName}
           disabled
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
         <TextField
           id="username"
@@ -52,6 +58,9 @@ const UserDetails = ({ setEdit }) => {
           variant="outlined"
           value={profile.username}
           disabled
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
         <TextField
           id="email"
@@ -61,6 +70,9 @@ const UserDetails = ({ setEdit }) => {
           variant="outlined"
           value={profile.email}
           disabled
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
       </div>
       <Button

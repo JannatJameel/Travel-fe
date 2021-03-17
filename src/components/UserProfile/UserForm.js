@@ -88,14 +88,6 @@ const UserForm = ({ setEdit }) => {
       >
         Edit
       </Button>
-      <Button
-        className={classes.button}
-        variant="contained"
-        color="primary"
-        onClick={() => setEdit(false)}
-      >
-        Cancel
-      </Button>
     </div>
   );
 };

@@ -1,13 +1,13 @@
-import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 import {
   signout,
   fetchProfile,
   userHistory,
 } from "../../store/actions/authActions";
-import { FaUserAstronaut } from "react-icons/fa";
-//Styling
+// Styling
 import { makeStyles } from "@material-ui/core/styles";
+import { FaUserAstronaut } from "react-icons/fa";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -52,10 +52,11 @@ const NavBar = () => {
           </Typography>
           {user ? (
             <>
-              <IconButton onClick={handleProfile}>
-                <FaUserAstronaut color="#fff" size="0.9em" />
-              </IconButton>
-
+              {!user.isAirline && (
+                <IconButton onClick={handleProfile}>
+                  <FaUserAstronaut color="#fff" size="0.9em" />
+                </IconButton>
+              )}
               <Button color="inherit" onClick={handleSignout}>
                 Sign out
               </Button>

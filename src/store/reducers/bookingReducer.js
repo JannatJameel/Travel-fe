@@ -12,15 +12,16 @@ const bookingReducer = (state = initialState, action) => {
         ...state,
         bookings: [...state.bookings, action.payload],
       };
-    case types.CHECKOUT:
-      return {
-        ...state,
-        bookings: [],
-      };
     case types.SET_PASSENGERS:
       return {
         ...state,
         passengers: action.payload,
+      };
+    case types.CHECKOUT:
+      return {
+        ...state,
+        bookings: [],
+        passengers: [],
       };
     default:
       return state;

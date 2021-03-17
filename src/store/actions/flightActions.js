@@ -46,3 +46,45 @@ export const fetchAirports = () => {
     }
   };
 };
+
+export const airlineFlights = () => {
+  return async (dispatch) => {
+    try {
+      const res = await instance.get("/airlines/flights");
+      dispatch({
+        type: types.FETCH_AIRLINE_FLIGHTS,
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log("error:", error);
+    }
+  };
+};
+
+export const flightCreate = (flight) => {
+  return async (dispatch) => {
+    try {
+      await instance.post("/airlines/flights", flight);
+      // dispatch({
+      //   type: types.CREATE_FLIGHT,
+      //   payload: res.data,
+      // });
+    } catch (error) {
+      console.log("error:", error);
+    }
+  };
+};
+
+export const flightUpdate = (flight) => {
+  return async (dispatch) => {
+    try {
+      const res = await instance.put("/airlines/flights", flight);
+      dispatch({
+        type: types.UPDATE_FLIGHT,
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log("error:", error);
+    }
+  };
+};

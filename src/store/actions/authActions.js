@@ -1,6 +1,7 @@
 import instance from "./instance";
 import decode from "jwt-decode";
 import * as types from "../types";
+import { airlineFlights } from "./flightActions";
 
 const setUser = (token) => {
   localStorage.setItem("myToken", token);
@@ -98,6 +99,7 @@ export const checkForToken = () => (dispatch) => {
       dispatch(setUser(token));
       dispatch(fetchProfile());
       dispatch(userHistory());
+      if (user.isAirline) dispatch(airlineFlights());
     } else {
       localStorage.removeItem("myToken");
       dispatch(signout());

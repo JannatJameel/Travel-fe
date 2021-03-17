@@ -9,6 +9,11 @@ export const addFlight = (newFlight) => {
   };
 };
 
+export const setPassengersInfo = (passengers) => ({
+  type: types.SET_PASSENGERS,
+  payload: passengers,
+});
+
 export const checkout = (cart) => {
   return async (dispatch) => {
     try {
@@ -21,8 +26,3 @@ export const checkout = (cart) => {
     }
   };
 };
-
-export const setPassengersInfo = (passengers) => ({
-  type: types.SET_PASSENGERS,
-  payload: passengers,
-});
