@@ -74,6 +74,7 @@ const Checkout = () => {
   const passengers = useSelector((state) => state.booking.passengers);
 
   const token = localStorage.getItem("myToken");
+
   let userId = null;
   if (token !== null) userId = decode(localStorage.getItem("myToken")).id;
 

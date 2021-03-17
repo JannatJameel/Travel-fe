@@ -5,8 +5,8 @@ import {
   fetchProfile,
   userHistory,
 } from "../../store/actions/authActions";
-import { FaUserAstronaut } from "react-icons/fa";
 //Styling
+import { FaUserAstronaut } from "react-icons/fa";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";

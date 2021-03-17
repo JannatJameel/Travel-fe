@@ -24,13 +24,12 @@ const FlightCard = ({ flight, isReturnFlight }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const flightClass = localStorage.getItem("class");
+
   const handleAddFlight = () => {
     dispatch(addFlight(flight));
     isReturnFlight ? history.push("/booking") : history.push("/return-flights");
   };
-
-  const flightClass = localStorage.getItem("class");
-
   return (
     <div margin="10">
       <Paper className={classes.paper} onClick={handleAddFlight}>

@@ -5,10 +5,6 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
-  //   root: {
-  //     display: "flex",
-  //     flexWrap: "wrap",
-  //   },
   textField: {
     marginLeft: "40%",
     width: "40ch",
