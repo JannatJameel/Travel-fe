@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { flightCreate } from "../../store/actions/flightActions";
 // Styling
 import { makeStyles } from "@material-ui/core/styles";
 import Autocomplete from "@material-ui/lab/Autocomplete";
@@ -24,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 const FlightForm = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [flight, setFlight] = useState({});
 
@@ -37,21 +40,29 @@ const FlightForm = () => {
     setFlight({ ...flight, [event.target.name]: event.target.value });
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    flight.departureTime = flight.departureTime + ":00";
+    flight.arrivalTime = flight.arrivalTime + ":00";
+    flight.availableBusiness = parseInt(flight.availableBusiness);
+    flight.availableEconomy = parseInt(flight.availableEconomy);
+    flight.priceBusiness = parseInt(flight.priceBusiness);
+    flight.priceEconomy = parseInt(flight.priceEconomy);
+    dispatch(flightCreate(flight));
+    history.replace("/");
+  };
 
   return (
     <div>
       <div>
         {/* Departure Airport */}
         <Autocomplete
-          id="departureAirport"
           value={flight.departureAirport}
           onChange={(event, newValue) => {
             setFlight({ ...flight, departureAirport: newValue });
           }}
           options={departureAirports}
           getOptionLabel={(option) => option}
-          style={{ width: 200 }}
+          className={classes.textField}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -60,22 +71,21 @@ const FlightForm = () => {
             />
           )}
         />
-        <br /> <br />
+        <br />
         {/* Arrival Airport */}
         <Autocomplete
-          id="arrivalAirports"
           value={flight.arrivalAirport}
           onChange={(event, newValue) => {
             setFlight({ ...flight, arrivalAirport: newValue });
           }}
           options={arrivalAirports}
           getOptionLabel={(option) => option}
-          style={{ width: 200 }}
+          className={classes.textField}
           renderInput={(params) => (
             <TextField {...params} label="Arrival Airport" variant="outlined" />
           )}
         />
-        <br /> <br />
+        <br />
         {/* Departure Date */}
         <TextField
           name="departureDate"
@@ -152,25 +162,11 @@ const FlightForm = () => {
         <br /> <br />
         {/* Economy Seats */}
         <TextField
-          name="economyBusiness"
-          value={flight.economyBusiness}
+          name="availableEconomy"
+          value={flight.availableEconomy}
           onChange={handleChange}
           variant="outlined"
           label="Economy Seats"
-          type="number"
-          className={classes.textField}
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
-        <br /> <br />
-        {/* Business Price */}
-        <TextField
-          name="priceBusiness"
-          value={flight.priceBusiness}
-          onChange={handleChange}
-          variant="outlined"
-          label="Business Price"
           type="number"
           className={classes.textField}
           InputLabelProps={{
@@ -185,6 +181,20 @@ const FlightForm = () => {
           onChange={handleChange}
           variant="outlined"
           label="Economy Price"
+          type="number"
+          className={classes.textField}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        <br /> <br />
+        {/* Business Price */}
+        <TextField
+          name="priceBusiness"
+          value={flight.priceBusiness}
+          onChange={handleChange}
+          variant="outlined"
+          label="Business Price"
           type="number"
           className={classes.textField}
           InputLabelProps={{
