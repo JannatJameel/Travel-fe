@@ -5,7 +5,6 @@ const initialState = {
   departureFlights: [],
   returnFlights: [],
   airlineFlights: [],
-  loading: true,
 };
 
 const flightReducer = (state = initialState, action) => {

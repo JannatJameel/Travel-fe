@@ -8,6 +8,8 @@ import Link from "@material-ui/core/Link";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+// Components
+import Loading from "../Loading";
 
 const useStyles = makeStyles((theme) => ({
   // root: {
@@ -47,7 +49,7 @@ const FlightForm = () => {
 
   const allAirports = useSelector((state) => state.flight.airports);
 
-  if (!flight) return <p>Loading....</p>;
+  if (!flight) return <Loading />;
 
   const departureAirports = allAirports.map((airport) => airport.location);
   const arrivalAirports = departureAirports.filter(
