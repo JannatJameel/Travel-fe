@@ -5,6 +5,7 @@ const initialState = {
   departureFlights: [],
   returnFlights: [],
   airlineFlights: [],
+  loading: true,
 };
 
 const flightReducer = (state = initialState, action) => {
@@ -28,6 +29,13 @@ const flightReducer = (state = initialState, action) => {
       return {
         ...state,
         airlineFlights: action.payload,
+      };
+    case types.UPDATE_FLIGHT:
+      return {
+        ...state,
+        airlineFlights: state.airlineFlights.map((flight) =>
+          flight.id === action.payload.id ? action.payload : flight
+        ),
       };
     default:
       return state;

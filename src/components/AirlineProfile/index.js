@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 // Components
 import FlightsList from "./FlightsList";
-import FlightForm from "./FlightForm";
+import FlightCreateForm from "./FlightCreateForm";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -74,7 +74,7 @@ const AirlineProfile = () => {
         <FlightsList />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <FlightForm />
+        <FlightCreateForm />
       </TabPanel>
     </div>
   );

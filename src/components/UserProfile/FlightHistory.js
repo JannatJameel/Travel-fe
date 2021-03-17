@@ -13,7 +13,7 @@ const FlightHistory = () => {
   return (
     <div>
       {flights.map((flight) => (
-        <FlightCard flight={flight} ket={flight.id} />
+        <FlightCard flight={flight} key={flight.id} />
       ))}
     </div>
   );

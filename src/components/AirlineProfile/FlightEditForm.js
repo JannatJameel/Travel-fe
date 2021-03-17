@@ -1,9 +1,10 @@
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { flightCreate } from "../../store/actions/flightActions";
+import { useHistory, useParams } from "react-router-dom";
+import { flightUpdate } from "../../store/actions/flightActions";
 // Styling
 import { makeStyles } from "@material-ui/core/styles";
+import Link from "@material-ui/core/Link";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -28,9 +29,26 @@ const FlightForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const [flight, setFlight] = useState({});
+  const { flightId } = useParams();
+  const foundFlight = useSelector((state) =>
+    state.flight.airlineFlights.find((flight) => flight.id === +flightId)
+  );
+
+  const [flight, setFlight] = useState(foundFlight ? foundFlight : null);
+
+  useEffect(() => {
+    if (foundFlight)
+      setFlight({
+        ...foundFlight,
+        departureAirport: foundFlight.departureAirport.location,
+        arrivalAirport: foundFlight.arrivalAirport.location,
+      });
+  }, [foundFlight]);
 
   const allAirports = useSelector((state) => state.flight.airports);
+
+  if (!flight) return <p>Loading....</p>;
+
   const departureAirports = allAirports.map((airport) => airport.location);
   const arrivalAirports = departureAirports.filter(
     (airport) => airport !== flight.departureAirport
@@ -39,21 +57,24 @@ const FlightForm = () => {
   const handleChange = (event) => {
     setFlight({ ...flight, [event.target.name]: event.target.value });
   };
-
   const handleSubmit = () => {
-    flight.departureTime = flight.departureTime + ":00";
-    flight.arrivalTime = flight.arrivalTime + ":00";
-    flight.availableBusiness = parseInt(flight.availableBusiness);
-    flight.availableEconomy = parseInt(flight.availableEconomy);
-    flight.priceBusiness = parseInt(flight.priceBusiness);
-    flight.priceEconomy = parseInt(flight.priceEconomy);
-    dispatch(flightCreate(flight));
+    if (flight.departureTime.length === 5)
+      flight.departureTime = flight.departureTime + ":00";
+    if (flight.arrivalTime.length === 5)
+      flight.arrivalTime = flight.arrivalTime + ":00";
+    flight.availableBusiness = +flight.availableBusiness;
+    flight.availableEconomy = +flight.availableEconomy;
+    flight.priceBusiness = +flight.priceBusiness;
+    flight.priceEconomy = +flight.priceEconomy;
+    console.log(flight);
+    dispatch(flightUpdate(flight));
     history.replace("/");
   };
 
   return (
     <div>
       <div>
+        <br /> <br />
         {/* Departure Airport */}
         <Autocomplete
           value={flight.departureAirport}
@@ -208,8 +229,13 @@ const FlightForm = () => {
         color="primary"
         onClick={handleSubmit}
       >
-        Add
+        Edit
       </Button>
+      <Link href="/dashboard" style={{ textDecoration: "none" }}>
+        <Button className={classes.button} variant="contained" color="primary">
+          Cancel
+        </Button>
+      </Link>
     </div>
   );
 };
