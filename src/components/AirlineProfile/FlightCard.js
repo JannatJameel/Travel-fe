@@ -47,7 +47,12 @@ const FlightCard = ({ flight }) => {
           <Grid item xs>
             <br />
             <br />
-            <Typography variant="subtitle1">BD {flight.price}</Typography>
+            <Typography variant="body2">
+              Economy BD {flight.priceEconomy}
+            </Typography>
+            <Typography variant="body2">
+              Business BD {flight.priceBusiness}
+            </Typography>
             <Typography variant="body2" color="textSecondary">
               Per Traveller
             </Typography>

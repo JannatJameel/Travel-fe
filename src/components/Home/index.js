@@ -75,7 +75,7 @@ const Home = () => {
           </Button>
 
           <br />
-          {/* Departure Flight */}
+          {/* Departure Airport */}
           <Autocomplete
             id="departureAirport"
             value={flight.departureAirport}
@@ -96,7 +96,7 @@ const Home = () => {
 
           <br />
 
-          {/* Return Flight */}
+          {/* Arrival Airport */}
           <Autocomplete
             id="arrivalAirports"
             value={flight.arrivalAirport}
