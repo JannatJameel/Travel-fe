@@ -6,8 +6,8 @@ import Signup from "./authentication/Signup";
 import UserProfile from "./UserProfile";
 import AirlineProfile from "./AirlineProfile";
 import FlightEditForm from "./AirlineProfile/FlightEditForm";
-import DepartureFlights from "./FlightList/DepartureFlights";
-import ReturnFlights from "./FlightList/ReturnFlights";
+import DepartureFlightsPage from "./FlightList/DepartureFlightsPage";
+import ReturnFlightsPage from "./FlightList/ReturnFlightsPage";
 import FlightReview from "./Booking/FlightReview";
 import Checkout from "./Booking/Checkout";
 
@@ -15,10 +15,10 @@ const Routes = () => {
   return (
     <Switch>
       <Route path="/departure-flights">
-        <DepartureFlights />
+        <DepartureFlightsPage />
       </Route>
       <Route path="/return-flights">
-        <ReturnFlights />
+        <ReturnFlightsPage />
       </Route>
       <Route path="/booking">
         <FlightReview />

@@ -73,6 +73,7 @@ const Checkout = () => {
   const bookings = useSelector((state) => state.booking.bookings);
   const passengers = useSelector((state) => state.booking.passengers);
 
+  if (localStorage.getItem("cartItems") === null) history.replace("/");
   let userId = null;
   if (user !== null) userId = user.id;
 

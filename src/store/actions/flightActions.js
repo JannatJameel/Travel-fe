@@ -1,6 +1,14 @@
 import instance from "./instance";
 import * as types from "../types";
 
+export const setSearch = (flight) => {
+  flight.passengers = flight.passengers.toString();
+  return {
+    type: types.SET_SEARCH,
+    payload: flight,
+  };
+};
+
 export const searchDepartures = (flight, history) => {
   return async (dispatch) => {
     try {
@@ -25,6 +33,20 @@ export const searchReturns = (flight) => {
       const res = await instance.get("/flights/returns", { params: flight });
       dispatch({
         type: types.FETCH_RETURNS,
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log("error:", error);
+    }
+  };
+};
+
+export const fetchAirlines = () => {
+  return async (dispatch) => {
+    try {
+      const res = await instance.get("/airlines");
+      dispatch({
+        type: types.FETCH_AIRLINES,
         payload: res.data,
       });
     } catch (error) {
@@ -64,11 +86,11 @@ export const airlineFlights = () => {
 export const flightCreate = (flight) => {
   return async (dispatch) => {
     try {
-      await instance.post("/airlines/flights", flight);
-      // dispatch({
-      //   type: types.CREATE_FLIGHT,
-      //   payload: res.data,
-      // });
+      const res = await instance.post("/airlines/flights", flight);
+      dispatch({
+        type: types.CREATE_FLIGHT,
+        payload: res.data,
+      });
     } catch (error) {
       console.log("error:", error);
     }

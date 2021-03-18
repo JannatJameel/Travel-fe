@@ -19,6 +19,12 @@ const useStyles = makeStyles((theme) => ({
 const FlightCard = ({ flight }) => {
   const classes = useStyles();
 
+  const flightClass = localStorage.getItem("class");
+  let price = "";
+  flightClass === "economy"
+    ? (price = flight.priceEconomy)
+    : (price = flight.priceBusiness);
+
   return (
     <div margin="10">
       <Paper className={classes.paper}>
@@ -47,7 +53,7 @@ const FlightCard = ({ flight }) => {
           <Grid item xs>
             <br />
             <br />
-            <Typography variant="subtitle1">BD {flight.price}</Typography>
+            <Typography variant="subtitle1">BD {price}</Typography>
             <Typography variant="body2" color="textSecondary">
               Per Traveller
             </Typography>

@@ -1,4 +1,5 @@
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   signout,
@@ -13,6 +14,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
+import { Box } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    color: "white",
   },
 }));
 
@@ -47,24 +50,41 @@ const NavBar = () => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            Time Travellers
-          </Typography>
+          <Link to={"/"} style={{ textDecoration: "none" }}>
+            <Typography variant="h6" className={classes.title}>
+              Travellers
+            </Typography>
+          </Link>
           {user ? (
             <>
               {!user.isAirline && (
-                <IconButton onClick={handleProfile}>
-                  <FaUserAstronaut color="#fff" size="0.9em" />
-                </IconButton>
+                <>
+                  <Box ml={145}>
+                    <IconButton onClick={handleProfile}>
+                      <FaUserAstronaut color="#fff" size="0.9em" />
+                    </IconButton>
+                  </Box>
+                  <Box ml={1}>
+                    <Button color="inherit" onClick={handleSignout}>
+                      Sign out
+                    </Button>
+                  </Box>
+                </>
               )}
-              <Button color="inherit" onClick={handleSignout}>
-                Sign out
-              </Button>
+              {user.isAirline && (
+                <Box ml={152}>
+                  <Button color="inherit" onClick={handleSignout}>
+                    Sign out
+                  </Button>
+                </Box>
+              )}
             </>
           ) : (
-            <Button color="inherit" href="/signin">
-              Sign in
-            </Button>
+            <Box ml={154}>
+              <Button color="inherit" href="/signin">
+                Sign in
+              </Button>
+            </Box>
           )}
         </Toolbar>
       </AppBar>
