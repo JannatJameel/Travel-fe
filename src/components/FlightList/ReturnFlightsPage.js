@@ -87,7 +87,11 @@ const ReturnFlightsPage = () => {
       </Drawer>
       <main className={classes.content}>
         <FlightSearch />
-        <ReturnFlights />
+        <ReturnFlights
+          flightTime={flightTime}
+          airline={airline}
+          price={price}
+        />
       </main>
     </div>
   );

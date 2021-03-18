@@ -24,6 +24,8 @@ const FlightCard = ({ flight, isReturnFlight }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const roundtrip = localStorage.getItem("roundtrip");
+
   const handleAddFlight = () => {
     dispatch(addFlight(flight));
     isReturnFlight ? history.push("/booking") : history.push("/return-flights");

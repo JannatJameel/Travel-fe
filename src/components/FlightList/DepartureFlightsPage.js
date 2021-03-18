@@ -45,7 +45,7 @@ const DepartureFlightsPage = () => {
     (airline) => airline.name
   );
 
-  const entries = airlinesList.map((airline) => [airline, false]);
+  const entries = airlinesList.map((airline) => [airline, true]);
   const airlines = Object.fromEntries(entries);
 
   const [flightTime, setFlightTime] = useState({

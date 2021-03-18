@@ -53,11 +53,16 @@ const FlightSearch = () => {
     history.replace("/dashboard");
   }
 
-  const [roundtrip, setRoundtrip] = useState(false);
+  console.log("search length", Object.keys(search).length);
+
+  const [roundtrip, setRoundtrip] = useState(
+    Object.keys(search).length === 6 ? true : false
+  );
 
   const [flight, setFlight] = useState(search);
 
   const handleChange = (event) => {
+    if (!roundtrip) delete flight.returnDate;
     setFlight({ ...flight, [event.target.name]: event.target.value });
   };
 
@@ -73,6 +78,7 @@ const FlightSearch = () => {
     if (roundtrip) dispatch(searchReturns(flight));
     localStorage.setItem("passengers", flight.passengers);
     localStorage.setItem("class", flight.flightClass);
+    localStorage.setItem("roundtrip", roundtrip);
     history.push("/departure-flights");
   };
 

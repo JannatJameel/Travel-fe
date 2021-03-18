@@ -52,24 +52,35 @@ const NavBar = () => {
         <Toolbar>
           <Link to={"/"} style={{ textDecoration: "none" }}>
             <Typography variant="h6" className={classes.title}>
-              Time Travellers
+              Travellers
             </Typography>
           </Link>
           {user ? (
             <>
               {!user.isAirline && (
-                <IconButton onClick={handleProfile}>
-                  <FaUserAstronaut color="#fff" size="0.9em" />
-                </IconButton>
+                <>
+                  <Box ml={145}>
+                    <IconButton onClick={handleProfile}>
+                      <FaUserAstronaut color="#fff" size="0.9em" />
+                    </IconButton>
+                  </Box>
+                  <Box ml={1}>
+                    <Button color="inherit" onClick={handleSignout}>
+                      Sign out
+                    </Button>
+                  </Box>
+                </>
               )}
-              <Box ml={145}>
-                <Button color="inherit" onClick={handleSignout}>
-                  Sign out
-                </Button>
-              </Box>
+              {user.isAirline && (
+                <Box ml={152}>
+                  <Button color="inherit" onClick={handleSignout}>
+                    Sign out
+                  </Button>
+                </Box>
+              )}
             </>
           ) : (
-            <Box ml={147}>
+            <Box ml={154}>
               <Button color="inherit" href="/signin">
                 Sign in
               </Button>

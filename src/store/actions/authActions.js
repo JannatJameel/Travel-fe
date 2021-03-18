@@ -30,6 +30,7 @@ export const signin = (user, history) => {
   return async (dispatch) => {
     try {
       const res = await instance.post("/signin", user);
+      res.data.isAirline ?? localStorage.removeItem("cartItems");
       localStorage.setItem("myToken", res.data.token);
       dispatch(setUser(res.data.token));
       alert("Successfully signed in");

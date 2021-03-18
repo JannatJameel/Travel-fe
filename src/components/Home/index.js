@@ -61,6 +61,7 @@ const Home = () => {
     if (roundtrip) dispatch(searchReturns(flight));
     localStorage.setItem("passengers", flight.passengers);
     localStorage.setItem("class", flight.flightClass);
+    localStorage.setItem("roundtrip", roundtrip);
     history.push("/departure-flights");
   };
 
