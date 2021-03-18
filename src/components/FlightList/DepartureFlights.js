@@ -2,7 +2,8 @@ import { useSelector } from "react-redux";
 // Components
 import FlightCard from "./FlightCard";
 
-const DepartureFlights = () => {
+const DepartureFlights = ({ flightTime, airline, price }) => {
+  console.log("Teeessst", flightTime, airline, price);
   const departureFlights = useSelector(
     (state) => state.flight.departureFlights
   );

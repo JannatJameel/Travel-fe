@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useSelector } from "react-redux";
 // Styling
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -39,6 +41,21 @@ const useStyles = makeStyles((theme) => ({
 const ReturnFlightsPage = () => {
   const classes = useStyles();
 
+  const airlinesList = useSelector((state) => state.flight.airlines).map(
+    (airline) => airline.name
+  );
+
+  const entries = airlinesList.map((airline) => [airline, false]);
+  const airlines = Object.fromEntries(entries);
+
+  const [flightTime, setFlightTime] = useState({
+    departureTime: "",
+    arrivalTime: "",
+  });
+
+  const [airline, setAirline] = useState(airlines);
+  const [price, setPrice] = useState([0, 1000]);
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -55,7 +72,16 @@ const ReturnFlightsPage = () => {
         <Toolbar />
         <div className={classes.drawerContainer}>
           <List>
-            <FilterBar />
+            <FilterBar
+              flightTime={flightTime}
+              setFlightTime={setFlightTime}
+              airlinesList={airlinesList}
+              airlines={airlines}
+              airline={airline}
+              setAirline={setAirline}
+              price={price}
+              setPrice={setPrice}
+            />
           </List>
         </div>
       </Drawer>

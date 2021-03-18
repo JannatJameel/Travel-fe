@@ -2,6 +2,7 @@ import * as types from "../types";
 
 const initialState = {
   search: {},
+  airlines: [],
   airports: [],
   departureFlights: [],
   returnFlights: [],
@@ -14,6 +15,11 @@ const flightReducer = (state = initialState, action) => {
       return {
         ...state,
         search: action.payload,
+      };
+    case types.FETCH_AIRLINES:
+      return {
+        ...state,
+        airlines: action.payload,
       };
     case types.FETCH_AIRPORTS:
       return {
@@ -34,6 +40,12 @@ const flightReducer = (state = initialState, action) => {
       return {
         ...state,
         airlineFlights: action.payload,
+      };
+    case types.CREATE_FLIGHT:
+      return {
+        ...state,
+        departureFlights: [...state.departureFlights, action.payload[0]],
+        returnFlights: [...state.returnFlights, action.payload[1]],
       };
     case types.UPDATE_FLIGHT:
       return {

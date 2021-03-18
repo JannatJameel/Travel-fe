@@ -176,7 +176,7 @@ const Home = () => {
               }}
             />
           )}
-          <br /> <br />
+          <br />
           <Button onClick={handleSubmit} variant="contained" color="primary">
             Search
           </Button>

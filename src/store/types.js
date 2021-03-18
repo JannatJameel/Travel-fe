@@ -1,3 +1,4 @@
+export const FETCH_AIRLINES = "FETCH_AIRLINES";
 export const FETCH_AIRPORTS = "FETCH_AIRPORTS";
 export const SET_SEARCH = "SET_SEARCH";
 export const FETCH_DEPARTURES = "FETCH_DEPARTURES";

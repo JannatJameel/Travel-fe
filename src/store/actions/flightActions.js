@@ -41,6 +41,20 @@ export const searchReturns = (flight) => {
   };
 };
 
+export const fetchAirlines = () => {
+  return async (dispatch) => {
+    try {
+      const res = await instance.get("/airlines");
+      dispatch({
+        type: types.FETCH_AIRLINES,
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log("error:", error);
+    }
+  };
+};
+
 export const fetchAirports = () => {
   return async (dispatch) => {
     try {
@@ -72,11 +86,11 @@ export const airlineFlights = () => {
 export const flightCreate = (flight) => {
   return async (dispatch) => {
     try {
-      await instance.post("/airlines/flights", flight);
-      // dispatch({
-      //   type: types.CREATE_FLIGHT,
-      //   payload: res.data,
-      // });
+      const res = await instance.post("/airlines/flights", flight);
+      dispatch({
+        type: types.CREATE_FLIGHT,
+        payload: res.data,
+      });
     } catch (error) {
       console.log("error:", error);
     }

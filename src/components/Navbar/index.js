@@ -62,9 +62,11 @@ const NavBar = () => {
                   <FaUserAstronaut color="#fff" size="0.9em" />
                 </IconButton>
               )}
-              <Button color="inherit" onClick={handleSignout}>
-                Sign out
-              </Button>
+              <Box ml={145}>
+                <Button color="inherit" onClick={handleSignout}>
+                  Sign out
+                </Button>
+              </Box>
             </>
           ) : (
             <Box ml={147}>
